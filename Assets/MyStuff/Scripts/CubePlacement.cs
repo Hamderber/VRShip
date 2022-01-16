@@ -8,7 +8,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class CubePlacement : MonoBehaviour
 {
     private Hashtable _shipPartIndex = new();
+    [SerializeField]
     private List<Vector3> _shipParts = new();
+    private List<Vector3> _shipPartsToAdd = new();
     [SerializeField]
     private GameObject[] _shipPartsVR = new GameObject[0];
     [SerializeField]
@@ -22,6 +24,10 @@ public class CubePlacement : MonoBehaviour
     private GameObject _shipCore;
     [SerializeField]
     private GameObject _previewPlacementObject;
+    [SerializeField]
+    private Material _badPlacementMaterial;
+    private bool _badPlacement = false;
+    private bool _placedInThisUpdate = false;
 
     private Vector3 _localScale = Vector3.one;
 
@@ -135,22 +141,17 @@ public class CubePlacement : MonoBehaviour
             z = 270f;
         }
         else z = 360f;
-
-        //DebugRotation(ob, "after");
         return Quaternion.Euler(x, y, z);
     }
 
     private Vector3 ClampPosition(GameObject ob)
     {
-        //DebugPosition(ob, "before");
         float x = ob.transform.localPosition.x;
         float y = ob.transform.localPosition.y;
         float z = ob.transform.localPosition.z;
-        
         x = (float)Math.Round(x);
         y = (float)Math.Round(y);
         z = (float)Math.Round(z);
-        //DebugPosition(ob, "after");
         return new Vector3(x,y,z);
     }
     private void DebugRotation(GameObject ob, string endStr = "")
@@ -163,19 +164,35 @@ public class CubePlacement : MonoBehaviour
         Debug.Log($"Local position of {ob.name} x:{ob.transform.localPosition.x} y:{ob.transform.localPosition.y} z:{ob.transform.localPosition.z} {endStr}");
         Debug.Log($"Global rotation of {ob.name} x:{ob.transform.position.x} y:{ob.transform.position.y} z:{ob.transform.position.z} {endStr}");
     }
+    private bool CheckIfValidPlacement()
+    {
+        if(_previewObject != null)
+        {
+            foreach (Vector3 vect in _shipParts)
+            {
+                if (_previewObject.transform.localPosition == vect)
+                {
+                    _badPlacement = true;
+                    _previewObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);//broken
+                    _previewObject.transform.localScale *= 1.01f;
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
     private void ShowProjectedPlacement()
     {
-        
         _placementPreviewEnabled = true;
         _previewObject = Instantiate(_previewPlacementObject, _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
         _previewObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
-        
-        //_previewObject.transform.localScale = (_localScale / 2);
-        
-        //_previewObject.transform.localScale = Vector3.one;
         _interactableInPlacementField.transform.localScale *= 0.5f;
+        _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = true;
         _previewObject.transform.parent = _interactableInPlacementField.transform;
         ClampObject(_previewObject);
+        _badPlacement = false;
+        CheckIfValidPlacement();
     }
     private void ClampObject(GameObject ob)
     {
@@ -204,54 +221,59 @@ public class CubePlacement : MonoBehaviour
     {
         _inPlacementField = false;
     }
-
-    private void Update()
+    private void RefreshShipParts()
     {
-        if (_previewObject != null)
+        _shipParts.AddRange(_shipPartsToAdd);
+        _shipPartsToAdd.Clear();
+    }
+
+    private void FixedUpdate()
+    {
+        if (_previewObject != null && _interactableInPlacementField.tag == _buildTag)
         {
             _interactableInPlacementField.transform.localScale = _localScale;
+            _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = false;
+            _badPlacement = false;
             Destroy(_previewObject);
         }
-
-        
-        if (_interactableInPlacementField != null && _interactableInPlacementField.tag != null && _interactableInPlacementField.GetComponent<XRGrabInteractable>() != null)
+        if (_interactableInPlacementField != null && _interactableInPlacementField.tag != null && _interactableInPlacementField.GetComponent<XRGrabInteractable>() != null && _shipPartIndex.ContainsKey(_interactableInPlacementField.name))
         {
-
-            if (_shipParts.Contains(_interactableInPlacementField.transform.localPosition)) return;
-
-            if (_inPlacementField && _interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected && _interactableInPlacementField.tag == _buildTag && _shipPartIndex.ContainsKey(_interactableInPlacementField.name))
+            if (_inPlacementField && _interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected && _interactableInPlacementField.tag == _buildTag)
             {
                 _localScale = _interactableInPlacementField.transform.localScale;
                 ShowProjectedPlacement();
             }
-            else if (_inPlacementField && !_interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected)
+            else if (CheckIfValidPlacement() && _inPlacementField && !_interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected)
             {
-                //Debug.Log("something in placement field and that thing -- IS NOT -- being held");
-                if (_interactableInPlacementField.tag == _buildTag && _shipPartIndex.ContainsKey(_interactableInPlacementField.name))
+                if(_interactableInPlacementField != null)
                 {
-                    GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedString, _shipPartIndex[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
-                    ClampObject(placedObject);
-
-                    GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
-
-                    _shipParts.Add(placedObject.transform.localPosition);
-
-                    Destroy(_interactableInPlacementField.gameObject);
-                    _interactableInPlacementField = null;
-                    Destroy(_previewObject);
-                    _previewObject = null;
+                    foreach (Vector3 vect in _shipParts)
+                    {
+                        if (!_placedInThisUpdate && CheckIfValidPlacement())
+                        {
+                            GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedString, _shipPartIndex[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
+                            ClampObject(placedObject);
+                            GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
+                            _shipPartsToAdd.Add(placedObject.transform.localPosition);
+                            Destroy(_interactableInPlacementField.gameObject);
+                            _interactableInPlacementField = null;
+                            Destroy(_previewObject);
+                            _previewObject = null;
+                            _placedInThisUpdate = true;
+                        }
+                    }
                 }
             }
         }
-        
+        _placedInThisUpdate = false;
+        RefreshShipParts();
     }
 }
 
 /*
  * Major issues:
  * 
- * Can have multiple objects placed in same spot potentially !!!! potentially fixed by using a list of occupied vector3's
- * Janky interaction of placement blocks when forced into cube (maybe a vr issue itself?)
+ * rare ability to still place multiple blocks at same time
  * 
  * 
  * 
