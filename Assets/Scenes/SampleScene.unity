@@ -2146,6 +2146,11 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1 &757033231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6546477515976978530, guid: 61f24a8ecc06ec741bf0cd8653692a10, type: 3}
+  m_PrefabInstance: {fileID: 6546477516789913093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &796934700
 GameObject:
   m_ObjectHideFlags: 0
@@ -3468,6 +3473,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship Root
       objectReference: {fileID: 0}
+    - target: {fileID: 7409132662272082567, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
+      propertyPath: _previewPlacementObject
+      value: 
+      objectReference: {fileID: 2769994420416357062, guid: 734e7ff16e8ec36468d0dbcde87e7381, type: 3}
+    - target: {fileID: 7409132662272082567, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
+      propertyPath: _playerLeftHandController
+      value: 
+      objectReference: {fileID: 2020941118}
+    - target: {fileID: 7409132662272082567, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
+      propertyPath: _previewPlacementMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7cfa2aa9f3ff08c4fbaf325a81eb959d, type: 2}
+    - target: {fileID: 7409132662272082567, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
+      propertyPath: _playerRightHandController
+      value: 
+      objectReference: {fileID: 757033231}
+    - target: {fileID: 8287836426775937401, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.11
+      objectReference: {fileID: 0}
     - target: {fileID: 8287836426775937401, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -4032,6 +4057,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2020941118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6546477516332838790, guid: 61f24a8ecc06ec741bf0cd8653692a10, type: 3}
+  m_PrefabInstance: {fileID: 6546477516789913093}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2070347636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,6 +4275,7 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}
 --- !u!114 &119506204429907022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4390,6 +4421,7 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}
 --- !u!4 &519869332990922576
 Transform:
   m_ObjectHideFlags: 0
@@ -4485,6 +4517,7 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0, z: 0}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}
 --- !u!65 &1465182711640213892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5144,6 +5177,7 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}
 --- !u!1 &4704972623538424228
 GameObject:
   m_ObjectHideFlags: 0
@@ -5366,6 +5400,7 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}
 --- !u!65 &6097242560179270608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5639,6 +5674,7 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}
 --- !u!114 &7580587651974485186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5658,6 +5694,7 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0, z: 0}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}
 --- !u!114 &7800725982366578573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5740,6 +5777,7 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}
 --- !u!4 &8287836426222010938
 Transform:
   m_ObjectHideFlags: 0
@@ -5796,3 +5834,4 @@ MonoBehaviour:
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
+  _previewPlacementObject: {fileID: 0}

@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="Assets\MyStuff\Scripts\CubePlacement.cs" />
     <Compile Include="Assets\MyStuff\Scripts\OffsetGrab.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\HandScript.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\ShipPart.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

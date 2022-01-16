@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class CubePlacement : MonoBehaviour
 {
@@ -18,12 +19,21 @@ public class CubePlacement : MonoBehaviour
     private string _buildTag;
     [SerializeField]
     private GameObject _shipCore;
+    [SerializeField]
+    private GameObject _previewPlacementObject;
+
+    private Vector3 _localScale = Vector3.one;
+
+    private bool _inPlacementField = false;
+    private bool _placementPreviewEnabled = false;
+    private GameObject _previewObject;
+    private GameObject _interactableInPlacementField;
 
     public void Start()
     {
         for(int x = 0; x < _shipPartsVR.Length; x++)
         {
-            Debug.Log("Adding stuff to hash");
+            //Debug.Log("Adding stuff to hash");
             _shipParts.Add(_shipPartsVR[x].name, _shipPartsPlaced[x].name);
         }
 
@@ -44,9 +54,8 @@ public class CubePlacement : MonoBehaviour
 
     private Quaternion ClampAxisRotation(GameObject ob)
     {
-        //Debug.Log($" Rotation of {_shipCore.name}: x {_shipCore.transform.localEulerAngles.x} y {_shipCore.transform.localEulerAngles.y} z {_shipCore.transform.localEulerAngles.z} (before)");
-        //Debug.Log($" Rotation of {ob.name}: x {rotation.x} y {rotation.y} z {rotation.z} (before)");
-        DebugRotation(ob, "before");
+        
+        //DebugRotation(ob, "before");
         float x = ob.transform.localEulerAngles.x;
         float y = ob.transform.localEulerAngles.y;
         float z = ob.transform.localEulerAngles.z;
@@ -126,24 +135,13 @@ public class CubePlacement : MonoBehaviour
         }
         else z = 360f;
 
-        //Debug.Log($" Rotation: x {x} y {y} z {z} (after)");
-        DebugRotation(ob, "after");
+        //DebugRotation(ob, "after");
         return Quaternion.Euler(x, y, z);
     }
 
     private Vector3 ClampPosition(GameObject ob)
     {
-        /*float x = localPosition.x;
-        float y = localPosition.y;
-        float z = localPosition.z;
-        //Debug.Log($" Local position: x {x} y {y} z {z} (before)");
-        //Debug.Log($" Local position: x {(float)Math.Round(x)} y {(float)Math.Round(y)} z {(float)Math.Round(z)} (after)");
-        return new Vector3((float)Math.Round(x), (float)Math.Round(y), (float)Math.Round(z));
-
-        //Debug.Log($" Rotation of {_shipCore.name}: x {_shipCore.transform.localEulerAngles.x} y {_shipCore.transform.localEulerAngles.y} z {_shipCore.transform.localEulerAngles.z} (before)");
-        //Debug.Log($" Rotation of {ob.name}: x {rotation.x} y {rotation.y} z {rotation.z} (before)");*/
-
-        DebugPosition(ob, "before");
+        //DebugPosition(ob, "before");
         float x = ob.transform.localPosition.x;
         float y = ob.transform.localPosition.y;
         float z = ob.transform.localPosition.z;
@@ -151,7 +149,7 @@ public class CubePlacement : MonoBehaviour
         x = (float)Math.Round(x);
         y = (float)Math.Round(y);
         z = (float)Math.Round(z);
-        DebugPosition(ob, "after");
+        //DebugPosition(ob, "after");
         return new Vector3(x,y,z);
     }
     private void DebugRotation(GameObject ob, string endStr = "")
@@ -164,40 +162,91 @@ public class CubePlacement : MonoBehaviour
         Debug.Log($"Local position of {ob.name} x:{ob.transform.localPosition.x} y:{ob.transform.localPosition.y} z:{ob.transform.localPosition.z} {endStr}");
         Debug.Log($"Global rotation of {ob.name} x:{ob.transform.position.x} y:{ob.transform.position.y} z:{ob.transform.position.z} {endStr}");
     }
+    private void ShowProjectedPlacement()
+    {
+        
+        _placementPreviewEnabled = true;
+        _previewObject = Instantiate(_previewPlacementObject, _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
+        _previewObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
+        
+        //_previewObject.transform.localScale = (_localScale / 2);
+        
+        //_previewObject.transform.localScale = Vector3.one;
+        _interactableInPlacementField.transform.localScale *= 0.5f;
+        _previewObject.transform.parent = _interactableInPlacementField.transform;
+        ClampObject(_previewObject);
+    }
+    private void ClampObject(GameObject ob)
+    {
+
+        ob.transform.parent = gameObject.transform;
+
+        ob.transform.localRotation = ClampAxisRotation(ob);
+        //DebugRotation(_shipCore);
+        //DebugRotation(ob, "after clamp");
+
+        ob.transform.localPosition = ClampPosition(ob);
+        //DebugPosition(ob, "after clamp");
+    }
     private void OnTriggerEnter(Collider other)
     {
-        string name = CleanupName(other.gameObject.name);
+        _inPlacementField = true;
+        _interactableInPlacementField = other.gameObject;
+        _interactableInPlacementField.name = CleanupName(_interactableInPlacementField.name);
         //Checks if the colliding object has the build tag that was defined in the editor,
         //Checks if the colliding object is contained in the hashtable by comparing the name of the object (removing the " (" and onwards from
         //the name as a way to check if it is a prefab
-        if (other.tag == _buildTag && _shipParts.ContainsKey(name))
+        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _inPlacementField = false;
+    }
+
+    private void Update()
+    {
+        if (_previewObject != null)
         {
-            
-            //Quaternion rotation = ClampAxisRotation(/*other.gameObject.transform.rotation.eulerAngles*/other.gameObject.transform.eulerAngles/*other.gameObject.transform.InverseTransformDirection(Vector3.forward)*/, other.gameObject);
-            Vector3 position = other.transform.position;//ClampPosition(other.transform.position);
-
-
-
-            GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedString, _shipParts[name])], position, other.transform.rotation);
-            placedObject.transform.parent = gameObject.transform;
-
-            placedObject.transform.localRotation = ClampAxisRotation(placedObject);
-            DebugRotation(_shipCore);
-            DebugRotation(placedObject, "after clamp");
-
-            placedObject.transform.localPosition = ClampPosition(placedObject);
-            DebugPosition(placedObject, "after clamp");
-
-            GameObject respawnedObject = Instantiate(other.gameObject, blockRespawnPoint, other.gameObject.transform.rotation);
-            Destroy(other.gameObject);
-
-            //DEBUG
-            /*for (int x = 0; x < _shipPartsVR.Length; x++)
-            {
-                Debug.Log($"Index[{x}] Prefab \"{_shipPartsVR[x].name}\" and Prefab \"{_shipPartsPlaced[x].name}\" and String array \"{_shipPartsPlacedString[x]}\" and hashtable key \"{name}\" returns \"{_shipParts[name]}\"");
-            }
-
-            Debug.Log($"The index of \"{_shipParts[name]}\" in array _shipsPartsPlaced is { Array.IndexOf(_shipPartsPlacedString, _shipParts[name])}");*/
+            _interactableInPlacementField.transform.localScale = _localScale;
+            Destroy(_previewObject);
         }
+        if (_interactableInPlacementField != null && _interactableInPlacementField.tag != null && _interactableInPlacementField.GetComponent<XRGrabInteractable>() != null)
+        {
+            if (_inPlacementField && _interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected && _interactableInPlacementField.tag == _buildTag && _shipParts.ContainsKey(_interactableInPlacementField.name))
+            {
+                _localScale = _interactableInPlacementField.transform.localScale;
+                ShowProjectedPlacement();
+            }
+            else if (_inPlacementField && !_interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected)
+            {
+                //Debug.Log("something in placement field and that thing -- IS NOT -- being held");
+                if (_interactableInPlacementField.tag == _buildTag && _shipParts.ContainsKey(_interactableInPlacementField.name))
+                {
+                    GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedString, _shipParts[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
+                    ClampObject(placedObject);
+
+                    GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
+                    Destroy(_interactableInPlacementField.gameObject);
+                    _interactableInPlacementField = null;
+                    Destroy(_previewObject);
+                    _previewObject = null;
+                }
+            }
+        }
+        
     }
 }
+
+/*
+ * Major issues:
+ * 
+ * Can have multiple objects placed in same spot potentially
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */

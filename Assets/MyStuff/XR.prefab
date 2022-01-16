@@ -81,6 +81,7 @@ GameObject:
   - component: {fileID: 6546477515976978542}
   - component: {fileID: 6546477515976978543}
   - component: {fileID: 6546477515976978540}
+  - component: {fileID: 6065772901053651087}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -299,7 +300,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -587,6 +600,20 @@ MonoBehaviour:
   m_SnapThresholdDistance: 10
   m_Reticle: {fileID: 0}
   m_StopLineAtFirstRaycastHit: 1
+--- !u!114 &6065772901053651087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546477515976978530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1705e666a5b83f8469943d7eeffb52fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandName: 
+  HandInteractionReference: {fileID: 0}
 --- !u!1 &6546477516332838790
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +627,7 @@ GameObject:
   - component: {fileID: 6546477516332838786}
   - component: {fileID: 6546477516332838787}
   - component: {fileID: 6546477516332838784}
+  - component: {fileID: 6779862697572310083}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: Untagged
@@ -818,7 +846,19 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6546477516332838790}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -1106,6 +1146,20 @@ MonoBehaviour:
   m_SnapThresholdDistance: 10
   m_Reticle: {fileID: 0}
   m_StopLineAtFirstRaycastHit: 1
+--- !u!114 &6779862697572310083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546477516332838790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1705e666a5b83f8469943d7eeffb52fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HandName: 
+  HandInteractionReference: {fileID: 0}
 --- !u!1 &6546477516349333286
 GameObject:
   m_ObjectHideFlags: 0
