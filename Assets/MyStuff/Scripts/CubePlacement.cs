@@ -7,7 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class CubePlacement : MonoBehaviour
 {
-    private Hashtable _shipParts = new Hashtable();
+    private Hashtable _shipPartIndex = new();
+    private List<Vector3> _shipParts = new();
     [SerializeField]
     private GameObject[] _shipPartsVR = new GameObject[0];
     [SerializeField]
@@ -34,7 +35,7 @@ public class CubePlacement : MonoBehaviour
         for(int x = 0; x < _shipPartsVR.Length; x++)
         {
             //Debug.Log("Adding stuff to hash");
-            _shipParts.Add(_shipPartsVR[x].name, _shipPartsPlaced[x].name);
+            _shipPartIndex.Add(_shipPartsVR[x].name, _shipPartsPlaced[x].name);
         }
 
         _shipPartsPlacedString = new string[_shipPartsVR.Length];
@@ -211,9 +212,14 @@ public class CubePlacement : MonoBehaviour
             _interactableInPlacementField.transform.localScale = _localScale;
             Destroy(_previewObject);
         }
+
+        
         if (_interactableInPlacementField != null && _interactableInPlacementField.tag != null && _interactableInPlacementField.GetComponent<XRGrabInteractable>() != null)
         {
-            if (_inPlacementField && _interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected && _interactableInPlacementField.tag == _buildTag && _shipParts.ContainsKey(_interactableInPlacementField.name))
+
+            if (_shipParts.Contains(_interactableInPlacementField.transform.localPosition)) return;
+
+            if (_inPlacementField && _interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected && _interactableInPlacementField.tag == _buildTag && _shipPartIndex.ContainsKey(_interactableInPlacementField.name))
             {
                 _localScale = _interactableInPlacementField.transform.localScale;
                 ShowProjectedPlacement();
@@ -221,12 +227,15 @@ public class CubePlacement : MonoBehaviour
             else if (_inPlacementField && !_interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected)
             {
                 //Debug.Log("something in placement field and that thing -- IS NOT -- being held");
-                if (_interactableInPlacementField.tag == _buildTag && _shipParts.ContainsKey(_interactableInPlacementField.name))
+                if (_interactableInPlacementField.tag == _buildTag && _shipPartIndex.ContainsKey(_interactableInPlacementField.name))
                 {
-                    GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedString, _shipParts[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
+                    GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedString, _shipPartIndex[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
                     ClampObject(placedObject);
 
                     GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
+
+                    _shipParts.Add(placedObject.transform.localPosition);
+
                     Destroy(_interactableInPlacementField.gameObject);
                     _interactableInPlacementField = null;
                     Destroy(_previewObject);
@@ -241,8 +250,8 @@ public class CubePlacement : MonoBehaviour
 /*
  * Major issues:
  * 
- * Can have multiple objects placed in same spot potentially
- * 
+ * Can have multiple objects placed in same spot potentially !!!! potentially fixed by using a list of occupied vector3's
+ * Janky interaction of placement blocks when forced into cube (maybe a vr issue itself?)
  * 
  * 
  * 
