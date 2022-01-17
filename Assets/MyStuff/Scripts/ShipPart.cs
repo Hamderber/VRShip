@@ -2,31 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
 
-public class ShipPart : XRGrabInteractable
+public class ShipPart : MonoBehaviour
 {
-    private InputDevice targetDevice;
+    public InputActionReference leftTriggerReference;
+    public InputActionReference rightTriggerReference;
+    public GameObject[] armorPrefabs;
+    private int _selectedArmorMeshIndex = 0;
 
-    void Start()
+
+    private void Awake()
     {
-        List<InputDevice> devices = new();
-        InputDeviceCharacteristics controllerCharacteristics = InputDeviceCharacteristics.Controller | InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Left;
-        InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
-
-        if (devices.Count > 0)
-        {
-            targetDevice = devices[0];
-        }
+        leftTriggerReference.action.started += LeftTrigger;
+        rightTriggerReference.action.started += RightTrigger;
+        Debug.Log(armorPrefabs.Length);
+        ChangeArmorMesh(0);
+    }
+    private void OnDestroy()
+    {
+        leftTriggerReference.action.started -= LeftTrigger;
+        rightTriggerReference.action.started -= RightTrigger;
     }
 
-    void Update()
+    private void ChangeArmorMesh(int delta)
     {
-        if (targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue) && primaryButtonValue)
+        if (delta == 0) gameObject.GetComponent<MeshFilter>().sharedMesh = armorPrefabs[0].GetComponent<MeshFilter>().sharedMesh;
+        else
         {
-            Debug.Log($"{interactorsSelecting[0].transform.parent.name}");
+            gameObject.GetComponent<MeshFilter>().sharedMesh = armorPrefabs[(_selectedArmorMeshIndex + delta) % armorPrefabs.Length].GetComponent<MeshFilter>().sharedMesh;
+            
+            _selectedArmorMeshIndex += delta;
         }
+        Debug.Log($"Mesh index {(_selectedArmorMeshIndex + delta) % armorPrefabs.Length}");
+    }
 
+    private void LeftTrigger(InputAction.CallbackContext context)
+    {
+        Debug.Log("Left");
+        ChangeArmorMesh(-1);
+    }
+
+    private void RightTrigger(InputAction.CallbackContext context)
+    {
+        Debug.Log("Right");
+        ChangeArmorMesh(1);
     }
 
 

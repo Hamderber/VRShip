@@ -3623,9 +3623,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armor - XR
       objectReference: {fileID: 0}
+    - target: {fileID: 1709496364098910247, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0995
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709496364098910247, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_Size.y
+      value: 0.0995
+      objectReference: {fileID: 0}
+    - target: {fileID: 1709496364098910247, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_Size.z
+      value: 0.0995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677170627995362363, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: armorPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 9a67882206f02e543b59a0f086dfcd01, type: 3}
     - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3666,6 +3694,10 @@ PrefabInstance:
     - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
@@ -4268,6 +4300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -4276,6 +4309,7 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}
 --- !u!114 &119506204429907022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4414,6 +4448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -4422,6 +4457,7 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}
 --- !u!4 &519869332990922576
 Transform:
   m_ObjectHideFlags: 0
@@ -4510,6 +4546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -4518,6 +4555,7 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}
 --- !u!65 &1465182711640213892
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5170,6 +5208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -5178,6 +5217,7 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}
 --- !u!1 &4704972623538424228
 GameObject:
   m_ObjectHideFlags: 0
@@ -5393,6 +5433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -5401,6 +5442,7 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}
 --- !u!65 &6097242560179270608
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5465,6 +5507,10 @@ PrefabInstance:
     - target: {fileID: 196817301475779931, guid: 61f24a8ecc06ec741bf0cd8653692a10, type: 3}
       propertyPath: m_Name
       value: XR
+      objectReference: {fileID: 0}
+    - target: {fileID: 196817301475779931, guid: 61f24a8ecc06ec741bf0cd8653692a10, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8222247338634970887, guid: 61f24a8ecc06ec741bf0cd8653692a10, type: 3}
       propertyPath: m_RootOrder
@@ -5667,6 +5713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -5675,6 +5722,7 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}
 --- !u!114 &7580587651974485186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5687,6 +5735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -5695,6 +5744,7 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}
 --- !u!114 &7800725982366578573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5770,6 +5820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -5778,6 +5829,7 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}
 --- !u!4 &8287836426222010938
 Transform:
   m_ObjectHideFlags: 0
@@ -5827,6 +5879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcaa3c8051b2d814e9aaac5b00023b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shipParts: []
   _shipPartsVR:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
@@ -5835,3 +5888,4 @@ MonoBehaviour:
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
   _previewPlacementObject: {fileID: 0}
+  _badPlacementMaterial: {fileID: 0}

@@ -187,7 +187,8 @@ public class CubePlacement : MonoBehaviour
         _placementPreviewEnabled = true;
         _previewObject = Instantiate(_previewPlacementObject, _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
         _previewObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
-        _interactableInPlacementField.transform.localScale *= 0.5f;
+        Debug.Log($"Preview mesh {_previewObject.GetComponent<MeshFilter>().sharedMesh} and placement mesh {_interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh}");
+        _interactableInPlacementField.transform.localScale *= 0.5f;// 0.5f;//hotfix changed from localscale *= 0.5
         _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = true;
         _previewObject.transform.parent = _interactableInPlacementField.transform;
         ClampObject(_previewObject);
@@ -252,6 +253,7 @@ public class CubePlacement : MonoBehaviour
                         if (!_placedInThisUpdate && CheckIfValidPlacement())
                         {
                             GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedString, _shipPartIndex[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
+                            placedObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
                             ClampObject(placedObject);
                             GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
                             _shipPartsToAdd.Add(placedObject.transform.localPosition);
@@ -274,7 +276,7 @@ public class CubePlacement : MonoBehaviour
  * Major issues:
  * 
  * rare ability to still place multiple blocks at same time
- * 
+ * buggy on edges of the placement field
  * 
  * 
  * 

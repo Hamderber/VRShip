@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,10 +53,13 @@
     <UnityVersion>2021.2.7f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\MyStuff\Scripts\ShipPart.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\HandScript.cs" />
     <Compile Include="Assets\MyStuff\Scripts\CubePlacement.cs" />
     <Compile Include="Assets\MyStuff\Scripts\OffsetGrab.cs" />
-    <Compile Include="Assets\MyStuff\Scripts\HandScript.cs" />
-    <Compile Include="Assets\MyStuff\Scripts\ShipPart.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
