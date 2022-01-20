@@ -41,11 +41,16 @@ public class CubePlacement : MonoBehaviour
     /// <summary>
     /// <br>When script is loaded, adds all ship parts (<see cref="_shipPartsVR"/>) to hashtable (<see cref="_shipPartsHashtable"/>) using their VR placable name as the key and the on-ship name as the value. Also adds all of the on-ship placed names to the list <see cref="_shipPartsPlacedNames"/>.</br>
     /// </summary>
-    public void Awake()
+    public void Start()
     {
         for(int x = 0; x < _shipPartsVR.Length; x++)
         {
             _shipPartsHashtable.Add(_shipPartsVR[x].name, _shipPartsPlaced[x].name);
+        }
+        // Yes, this needs to be two separate loops. You refactored this in the past and broke it!
+        _shipPartsPlacedNames = new string[_shipPartsVR.Length];
+        for (int x = 0; x< _shipPartsVR.Length; x++)
+        {
             _shipPartsPlacedNames[x] = _shipPartsPlaced[x].name;
         }
 
