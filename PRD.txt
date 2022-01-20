@@ -1,0 +1,39 @@
+redesign to support multi-size blocks
+procedural asteroid generation
+resource gathering
+increase ship buildable size with some type of upgrade
+make space skybox
+simple ship save/load
+make base class that all ship parts will inherit
+blocks placed contribute to overall ship mass but have their own health
+make picked up blocks not inherit hand's rotation
+find a way to prevent placing blocks floating in the air, they must be adjacent to something else
+if a block becomes floating, it is destroyed (maybe breaks off somehow? might be expensive to calculate)
+**orbital mechanics eventually
+build mode and play mode
+trading stations
+radiant quests?
+change building from tracking ship core's vector3's to gameobject (still use vector3 for placement checking)
+any weapon on grid verifies there are no blocks in front of it before firing
+projectiles fired inherit the reference to what shot it and doesnt do damage to that thing
+establish list of blocks that are heavily recommended to make a ship "valid"
+inventory size is infinite but slightly increases energy usage and ship mass
+
+when ship health is 0, it explodes
+if player doesnt eject in escape pod they lose all gained experience and fail all quests (which are radiant, maybe remove in the future)
+if player does eject, they keep everything and respawn at a random (or maybe selected?) trading station
+
+ship block types: ** = required
+ - ** pressurized water reactor or quantum cheat cube or batteries (power source)
+ - ** thrusters (add directional velocity and automattically assist in stopping ship with no directional input)
+ - ** inventory matrix (only one allowed, gives ship an inventory)
+ - multi-dimensional all-in-one super cube (only one allowed, removes the requirement of ALL mandatory blocks with a penalty of them being only 10% effective, but inventory still infinite)
+ - turrets
+ - ** gyroscope (use a function of mass and number of gyroscopes to improve how easy the ship is to control, no rotation if no gyros)
+ - pressurized magnesuim flares (tracking-targets or raytraces that intersect within a range of flare make the flare become target)
+ - armor blocks
+ - ** cockpit (only one allowed, required even if super cube is added)
+ - shield generator (self-explanatory, if shield generator active damaged blocks have a shield shader when damaged and the shield health is reduced instead)
+ - solar sail (very, very, very small one-directional thrust given but they produce power!)
+ - ** life support system (if destroyed, calcualtion of blocks on ship and time to determine when player will die if they dont eject before time runs out)
+ - radar (shows players where nearby things are on screen)
