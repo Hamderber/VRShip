@@ -7,34 +7,20 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class CubePlacement : MonoBehaviour
 {
-    [SerializeField]
-    private bool _debugThisFile = false;
-
+    [SerializeField] private List<Vector3> _shipParts = new();
+    [SerializeField] private GameObject[] _shipPartsVR = new GameObject[0];
+    [SerializeField] private GameObject[] _shipPartsPlaced = new GameObject[0];
+    [SerializeField] private string[] _shipPartsPlacedNames = new string[0];
+    [SerializeField] private Vector3 blockRespawnPoint;// World coordinate where new instances of placed blocks will spawn
+    [SerializeField] private string _buildTag;// The tag of objects that can be attached to the ship
+    [SerializeField] private GameObject _shipCore;// GameObject reference to the ship core (parent of the whole PHYSICAL ship)
+    [SerializeField] private GameObject _previewPlacementObject;// GameObject reference to the preview placement object (NOT the preview object itself)
+    [SerializeField] private Material _badPlacementMaterial;// Material reference for what a bad preview placement will be shown as
     private Hashtable _shipPartsHashtable = new();
-    [SerializeField]
-    private List<Vector3> _shipParts = new();
     private List<Vector3> _shipPartsToAdd = new();
-    [SerializeField]
-    private GameObject[] _shipPartsVR = new GameObject[0];
-    [SerializeField]
-    private GameObject[] _shipPartsPlaced = new GameObject[0];
-    private string[] _shipPartsPlacedNames = new string[0];
-    [SerializeField]
-    private Vector3 blockRespawnPoint;
-    [SerializeField]
-    private string _buildTag;
-    [SerializeField]
-    private GameObject _shipCore;
-    [SerializeField]
-    private GameObject _previewPlacementObject;
-    [SerializeField]
-    private Material _badPlacementMaterial;
     private bool _placedInThisUpdate = false;
-
     private Vector3 _localScale = Vector3.one;
-
     private bool _inPlacementField = false;
-    private bool _placementPreviewEnabled = false;
     private GameObject _previewObject;
     private GameObject _interactableInPlacementField;
 

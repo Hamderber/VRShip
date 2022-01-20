@@ -14,6 +14,7 @@ public class ShipPart : MonoBehaviour
     private int _selectedArmorMeshIndex = 0;
     public int defaultArmorIndex = 0;
     public Vector3 localPlacementCoordinates = Vector3.zero;
+    public Vector3 blockRespawnPoint = Vector3.zero;
 
 
     private void Awake()

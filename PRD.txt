@@ -1,3 +1,10 @@
+ship building features:
+- save the index of which armor mesh is selected after one is placed
+- fix the default cube armor mesh (random extra face on the inside?)
+- add a way to delete or remove placed blocks (NOT the ship core)
+- make the FixedUpdate() method of CubePlacement not a dumpsterfire
+
+
 redesign to support multi-size blocks
 procedural asteroid generation
 resource gathering
