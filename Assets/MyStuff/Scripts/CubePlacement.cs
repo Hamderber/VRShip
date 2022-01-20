@@ -7,7 +7,10 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class CubePlacement : MonoBehaviour
 {
-    private Hashtable _shipPartIndex = new();
+    [SerializeField]
+    private bool _debugThisFile = false;
+
+    private Hashtable _shipPartsHashtable = new();
     [SerializeField]
     private List<Vector3> _shipParts = new();
     private List<Vector3> _shipPartsToAdd = new();
@@ -15,7 +18,7 @@ public class CubePlacement : MonoBehaviour
     private GameObject[] _shipPartsVR = new GameObject[0];
     [SerializeField]
     private GameObject[] _shipPartsPlaced = new GameObject[0];
-    private string[] _shipPartsPlacedString = new string[0];
+    private string[] _shipPartsPlacedNames = new string[0];
     [SerializeField]
     private Vector3 blockRespawnPoint;
     [SerializeField]
@@ -26,7 +29,6 @@ public class CubePlacement : MonoBehaviour
     private GameObject _previewPlacementObject;
     [SerializeField]
     private Material _badPlacementMaterial;
-    private bool _badPlacement = false;
     private bool _placedInThisUpdate = false;
 
     private Vector3 _localScale = Vector3.one;
@@ -36,42 +38,40 @@ public class CubePlacement : MonoBehaviour
     private GameObject _previewObject;
     private GameObject _interactableInPlacementField;
 
-    public void Start()
+    /// <summary>
+    /// <br>When script is loaded, adds all ship parts (<see cref="_shipPartsVR"/>) to hashtable (<see cref="_shipPartsHashtable"/>) using their VR placable name as the key and the on-ship name as the value. Also adds all of the on-ship placed names to the list <see cref="_shipPartsPlacedNames"/>.</br>
+    /// </summary>
+    public void Awake()
     {
         for(int x = 0; x < _shipPartsVR.Length; x++)
         {
-            //Debug.Log("Adding stuff to hash");
-            _shipPartIndex.Add(_shipPartsVR[x].name, _shipPartsPlaced[x].name);
-        }
-
-        _shipPartsPlacedString = new string[_shipPartsVR.Length];
-        for(int x = 0;x < _shipPartsVR.Length; x++)
-        {
-            _shipPartsPlacedString[x] = _shipPartsPlaced[x].name;
+            _shipPartsHashtable.Add(_shipPartsVR[x].name, _shipPartsPlaced[x].name);
+            _shipPartsPlacedNames[x] = _shipPartsPlaced[x].name;
         }
 
     }
+    /// <summary>
+    /// <br>Returns a <see cref="string"/> with extra instances of "(Clone)" removed from the end of the string.</br>
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     private string CleanupName(string name)
     {
         if (name.IndexOf("(") == -1) return name;
         else if (name.IndexOf("(Clone)") != -1) return name.Substring(0, name.IndexOf("(Clone)"));
-        else if (name.IndexOf("(Clone)") != -1) return name.Substring(0, name.IndexOf("(Clone)"));
         else return name[(name.IndexOf("("))..];
     }
-
+    /// <summary>
+    /// <br>Returns <see cref="Quaternion"/> with <see cref="GameObject"/> 'ob' x, y, z rotation clamped to nearest 90 degrees.</br>
+    /// <br>Needs optimization!</br>
+    /// </summary>
+    /// <param name="ob"></param>
+    /// <returns></returns>
     private Quaternion ClampAxisRotation(GameObject ob)
     {
-        
-        //DebugRotation(ob, "before");
-        float x = ob.transform.localEulerAngles.x;
-        float y = ob.transform.localEulerAngles.y;
-        float z = ob.transform.localEulerAngles.z;
-        //this is bad make this better later
-        while (x < -360f || x > 360f)
-        {
-            if (x < -360f) x += 360f;
-            if (x > 360f) x -= 360f;
-        }
+        float x = ((ob.transform.localEulerAngles.x % 360f) +360f) % 360f;
+        float y = ((ob.transform.localEulerAngles.y % 360f) + 360f) % 360f;
+        float z = ((ob.transform.localEulerAngles.z % 360f) + 360f) % 360f;
 
         if (x <= 45f)
         {
@@ -91,14 +91,6 @@ public class CubePlacement : MonoBehaviour
         }
         else x = 360f;
 
-        
-
-        //this is bad make this better later
-        while (y < -360f || y > 360f)
-        {
-            if (y < -360f) y += 360f;
-            if (y > 360f) y -= 360f;
-        }
         if (y <= 45f)
         {
             y = 0f;
@@ -117,13 +109,6 @@ public class CubePlacement : MonoBehaviour
         }
         else y = 360f;
 
-        
-        //this is bad make this better later
-        while (z < -360f || z > 360f)
-        {
-            if (z < -360f) z += 360f;
-            if (z > 360f) z -= 360f;
-        }
         if (z <= 45f)
         {
             z = 0f;
@@ -143,37 +128,52 @@ public class CubePlacement : MonoBehaviour
         else z = 360f;
         return Quaternion.Euler(x, y, z);
     }
-
+    /// <summary>
+    /// <br>Returns a <see cref="Vector3"/> that is the <see cref="GameObject"/>'s local coordinates rounded to the nearest whole number as a <see cref="float"/>.</br>
+    /// </summary>
+    /// <param name="ob"></param>
+    /// <returns></returns>
     private Vector3 ClampPosition(GameObject ob)
     {
-        float x = ob.transform.localPosition.x;
-        float y = ob.transform.localPosition.y;
-        float z = ob.transform.localPosition.z;
-        x = (float)Math.Round(x);
-        y = (float)Math.Round(y);
-        z = (float)Math.Round(z);
-        return new Vector3(x,y,z);
+        return new Vector3((float)Math.Round(ob.transform.localPosition.x), (float)Math.Round(ob.transform.localPosition.y), (float)Math.Round(ob.transform.localPosition.z));
     }
+    /// <summary>
+    /// <br>Logs <see cref="GameObject"/>'s local and global rotation to console.</br>
+    /// <br><paramref name="endStr"/> is an optional <see cref="string"/> to add to the end of the log, such as "after clamp" or "test method abc."</br>
+    /// </summary>
+    /// <param name="ob"></param>
     private void DebugRotation(GameObject ob, string endStr = "")
     {
         Debug.Log($"Local rotation of {ob.name} x:{ob.transform.localEulerAngles.x} y:{ob.transform.localEulerAngles.y} z:{ob.transform.localEulerAngles.z} {endStr}");
         Debug.Log($"Global rotation of {ob.name} x:{ob.transform.eulerAngles.x} y:{ob.transform.eulerAngles.y} z:{ob.transform.eulerAngles.z} {endStr}");
     }
+    /// <summary>
+    /// <br>Logs <see cref="GameObject"/>'s local and global position to console.</br>
+    /// <br><paramref name="endStr"/> is an optional <see cref="string"/> to add to the end, such as "after clamp" or "test method abc."</br>
+    /// </summary>
+    /// <param name="ob"></param>
     private void DebugPosition(GameObject ob, string endStr = "")
     {
         Debug.Log($"Local position of {ob.name} x:{ob.transform.localPosition.x} y:{ob.transform.localPosition.y} z:{ob.transform.localPosition.z} {endStr}");
         Debug.Log($"Global rotation of {ob.name} x:{ob.transform.position.x} y:{ob.transform.position.y} z:{ob.transform.position.z} {endStr}");
     }
+    /// <summary>
+    /// <br>Returns true if <see cref="_previewObject"/> exists and none of the <see cref="Vector3"/> coordinates in <see cref="_shipParts"/> are taken already.</br>
+    /// <br>If a <see cref="Vector3"/> coortinate is taken, makes the <see cref="_previewObject"/> <see cref="Material"/> <see cref="Color"/> red and increases the <see cref="Transform.localScale"/> by</br>
+    /// <br>1% and returns false.</br>
+    /// </summary>
+    /// <returns></returns>
     private bool CheckIfValidPlacement()
-    {
+    {//Needs optimization!
+        //eventually change _shipParts to a shipparts object list and check if placement spot is taken
+        //how to have this work with multi-sized objects????
         if(_previewObject != null)
         {
             foreach (Vector3 vect in _shipParts)
             {
                 if (_previewObject.transform.localPosition == vect)
                 {
-                    _badPlacement = true;
-                    _previewObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);//broken
+                    _previewObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
                     _previewObject.transform.localScale *= 1.01f;
                     return false;
                 }
@@ -182,46 +182,58 @@ public class CubePlacement : MonoBehaviour
         }
         return false;
     }
+    /// <summary>
+    /// <br>Instantiates <see cref="_previewObject"/> with the same <see cref="Quaternion"/> as <see cref="_interactableInPlacementField"/> and sets</br>
+    /// <br><see cref="_previewObject"/>'s <see cref="Mesh"/> to the same as <see cref="_interactableInPlacementField"/>. Sets the <see cref="Transform.localScale"/> of</br>
+    /// <br><see cref="_interactableInPlacementField"/> to 50% and its <see cref="BoxCollider"/> to trigger (to prevent physics collision).</br>
+    /// <br><see cref="_interactableInPlacementField"/> is the parent and the object is clamped (<see cref="ClampObject(GameObject)"/>).</br>
+    /// <br>Also checks if the projected placement is valid. (<see cref="CheckIfValidPlacement"/>).</br>
+    /// </summary>
     private void ShowProjectedPlacement()
     {
-        _placementPreviewEnabled = true;
         _previewObject = Instantiate(_previewPlacementObject, _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
         _previewObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
-        Debug.Log($"Preview mesh {_previewObject.GetComponent<MeshFilter>().sharedMesh} and placement mesh {_interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh}");
-        _interactableInPlacementField.transform.localScale *= 0.5f;// 0.5f;//hotfix changed from localscale *= 0.5
+        _interactableInPlacementField.transform.localScale *= 0.5f;
         _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = true;
         _previewObject.transform.parent = _interactableInPlacementField.transform;
         ClampObject(_previewObject);
-        _badPlacement = false;
         CheckIfValidPlacement();
     }
+    /// <summary>
+    /// <br><see cref="GameObject"/> <paramref name="ob"/>'s parent is set to this <see cref="GameObject"/> and its position and rotation are clamped.</br>
+    /// </summary>
+    /// <param name="ob"></param>
     private void ClampObject(GameObject ob)
     {
-
         ob.transform.parent = gameObject.transform;
-
         ob.transform.localRotation = ClampAxisRotation(ob);
-        //DebugRotation(_shipCore);
-        //DebugRotation(ob, "after clamp");
-
         ob.transform.localPosition = ClampPosition(ob);
-        //DebugPosition(ob, "after clamp");
     }
+    /// <summary>
+    /// <br>Sets <see cref="_inPlacementField"/> to true once a <see cref="Collider"/> enters, then saves the colliding <see cref="GameObject"/> reference</br>
+    /// <br>to <see cref="_interactableInPlacementField"/> then cleans up its name (<see cref="CleanupName(string)"/>).</br>
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         _inPlacementField = true;
         _interactableInPlacementField = other.gameObject;
         _interactableInPlacementField.name = CleanupName(_interactableInPlacementField.name);
-        //Checks if the colliding object has the build tag that was defined in the editor,
-        //Checks if the colliding object is contained in the hashtable by comparing the name of the object (removing the " (" and onwards from
-        //the name as a way to check if it is a prefab
-        
     }
-
+    /// <summary>
+    /// <br>Sets <see cref="_inPlacementField"/> to false once a <see cref="Collider"/> leaves, then sets the colliding <see cref="GameObject"/> reference</br>
+    /// <br>to null.</br>
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         _inPlacementField = false;
+        _interactableInPlacementField = null;
     }
+    /// <summary>
+    /// <br>Adds the <see cref="Vector3"/> <see cref="List{T}"/> <see cref="_shipPartsToAdd"/> to the <see cref="Vector3"/> <see cref="List{T}"/> <see cref="_shipParts"/></br>
+    /// <br>then clears the <see cref="_shipPartsToAdd"/> <see cref="List{T}"/>.</br>
+    /// </summary>
     private void RefreshShipParts()
     {
         _shipParts.AddRange(_shipPartsToAdd);
@@ -230,14 +242,13 @@ public class CubePlacement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_previewObject != null && _interactableInPlacementField.tag == _buildTag)
+        if (_previewObject != null && _interactableInPlacementField.tag == _buildTag)//is != null necessary?
         {
             _interactableInPlacementField.transform.localScale = _localScale;
             _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = false;
-            _badPlacement = false;
             Destroy(_previewObject);
         }
-        if (_interactableInPlacementField != null && _interactableInPlacementField.tag != null && _interactableInPlacementField.GetComponent<XRGrabInteractable>() != null && _shipPartIndex.ContainsKey(_interactableInPlacementField.name))
+        if (_interactableInPlacementField != null && _interactableInPlacementField.tag != null && _interactableInPlacementField.GetComponent<XRGrabInteractable>() != null && _shipPartsHashtable.ContainsKey(_interactableInPlacementField.name))
         {
             if (_inPlacementField && _interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected && _interactableInPlacementField.tag == _buildTag)
             {
@@ -252,7 +263,7 @@ public class CubePlacement : MonoBehaviour
                     {
                         if (!_placedInThisUpdate && CheckIfValidPlacement())
                         {
-                            GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedString, _shipPartIndex[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
+                            GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedNames, _shipPartsHashtable[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
                             placedObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
                             ClampObject(placedObject);
                             GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);

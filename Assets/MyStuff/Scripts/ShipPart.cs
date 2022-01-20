@@ -12,19 +12,26 @@ public class ShipPart : MonoBehaviour
     public InputActionReference rightTriggerReference;
     public GameObject[] armorPrefabs;
     private int _selectedArmorMeshIndex = 0;
+    public int defaultArmorIndex = 0;
+    public Vector3 localPlacementCoordinates = Vector3.zero;
 
 
     private void Awake()
     {
         leftTriggerReference.action.started += LeftTrigger;
         rightTriggerReference.action.started += RightTrigger;
-        Debug.Log(armorPrefabs.Length);
-        ChangeArmorMesh(0);
+        ChangeArmorMesh(defaultArmorIndex);
     }
     private void OnDestroy()
     {
         leftTriggerReference.action.started -= LeftTrigger;
         rightTriggerReference.action.started -= RightTrigger;
+        PlayDestroyEffect();
+    }
+
+    private void PlayDestroyEffect()
+    {
+        Debug.Log("Destroy effect");
     }
 
     private void ChangeArmorMesh(int delta)

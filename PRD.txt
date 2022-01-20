@@ -2,7 +2,6 @@ redesign to support multi-size blocks
 procedural asteroid generation
 resource gathering
 increase ship buildable size with some type of upgrade
-make space skybox
 simple ship save/load
 make base class that all ship parts will inherit
 blocks placed contribute to overall ship mass but have their own health

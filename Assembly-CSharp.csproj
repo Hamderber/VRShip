@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\MyStuff\Scripts\ShipPart.cs" />
     <Compile Include="Assets\MyStuff\Scripts\HandScript.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\Ship.cs" />
     <Compile Include="Assets\MyStuff\Scripts\CubePlacement.cs" />
     <Compile Include="Assets\MyStuff\Scripts\OffsetGrab.cs" />
   </ItemGroup>
