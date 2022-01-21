@@ -8,25 +8,20 @@ using UnityEngine.InputSystem;
 
 public class ShipPart : MonoBehaviour
 {
-    public InputActionReference leftTriggerReference;
-    public InputActionReference rightTriggerReference;
+    
     public GameObject[] armorPrefabs;
-    private int _selectedArmorMeshIndex = 0;
-    public int defaultArmorIndex = 0;
-    public Vector3 localPlacementCoordinates = Vector3.zero;
+    public int selectedArmorMeshIndex = 0;
+    public int defaultArmorMeshIndex = 0;
+    public List<Vector3> localPlacementCoordinates = new();
     public Vector3 blockRespawnPoint = Vector3.zero;
 
 
     private void Awake()
     {
-        leftTriggerReference.action.started += LeftTrigger;
-        rightTriggerReference.action.started += RightTrigger;
-        ChangeArmorMesh(defaultArmorIndex);
+        RefreshMesh();
     }
     private void OnDestroy()
     {
-        leftTriggerReference.action.started -= LeftTrigger;
-        rightTriggerReference.action.started -= RightTrigger;
         PlayDestroyEffect();
     }
 
@@ -35,29 +30,22 @@ public class ShipPart : MonoBehaviour
         Debug.Log("Destroy effect");
     }
 
-    private void ChangeArmorMesh(int delta)
+    public void RefreshMesh()
     {
-        if (delta == 0) gameObject.GetComponent<MeshFilter>().sharedMesh = armorPrefabs[0].GetComponent<MeshFilter>().sharedMesh;
+        gameObject.GetComponent<MeshFilter>().sharedMesh = armorPrefabs[selectedArmorMeshIndex].GetComponent<MeshFilter>().sharedMesh;
+    }
+
+    public void ChangeArmorMesh(int delta = 0)
+    {
+        if (delta == 0)
+        {
+            RefreshMesh();//mesh sometimes one off for some reason when blocks respawn
+        }
         else
         {
-            gameObject.GetComponent<MeshFilter>().sharedMesh = armorPrefabs[(_selectedArmorMeshIndex + delta) % armorPrefabs.Length].GetComponent<MeshFilter>().sharedMesh;
+            selectedArmorMeshIndex += delta;
+            gameObject.GetComponent<MeshFilter>().sharedMesh = armorPrefabs[(selectedArmorMeshIndex + delta + armorPrefabs.Length) % armorPrefabs.Length].GetComponent<MeshFilter>().sharedMesh;
             
-            _selectedArmorMeshIndex += delta;
         }
-        Debug.Log($"Mesh index {(_selectedArmorMeshIndex + delta) % armorPrefabs.Length}");
     }
-
-    private void LeftTrigger(InputAction.CallbackContext context)
-    {
-        Debug.Log("Left");
-        ChangeArmorMesh(-1);
-    }
-
-    private void RightTrigger(InputAction.CallbackContext context)
-    {
-        Debug.Log("Right");
-        ChangeArmorMesh(1);
-    }
-
-
 }

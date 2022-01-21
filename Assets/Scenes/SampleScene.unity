@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.016413286, g: 0.016711494, b: 0.020493781, a: 1}
+  m_IndirectSpecularColor: {r: 0.01440356, g: 0.015010017, b: 0.019189978, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2280,6 +2280,75 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &916090725
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_Name
+      value: Armor - XR
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677170627995362363, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: blockRespawnPoint.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677170627995362363, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: blockRespawnPoint.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677170627995362363, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: blockRespawnPoint.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
 --- !u!1 &944004204
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,8 +3203,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 757033231}
     - target: {fileID: 8287836426775937401, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287836426775937401, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287836426775937401, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.11
+      value: -0.91
       objectReference: {fileID: 0}
     - target: {fileID: 8287836426775937401, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3280,6 +3357,14 @@ PrefabInstance:
       value: 0.0995
       objectReference: {fileID: 0}
     - target: {fileID: 5677170627995362363, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: blockRespawnPoint.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677170627995362363, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: blockRespawnPoint.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677170627995362363, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
       propertyPath: armorPrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 919132149155446097, guid: 9a67882206f02e543b59a0f086dfcd01, type: 3}
@@ -3309,7 +3394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5942713308029398262, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3949,6 +4034,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
@@ -4097,6 +4183,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
@@ -4195,6 +4282,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0, z: 0}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
@@ -4857,6 +4945,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
@@ -5017,6 +5106,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
@@ -5297,6 +5387,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
@@ -5319,6 +5410,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0, z: 0}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
@@ -5404,6 +5496,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}
@@ -5463,6 +5556,7 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
   _buildTag: ShipPart
   _shipCore: {fileID: 0}

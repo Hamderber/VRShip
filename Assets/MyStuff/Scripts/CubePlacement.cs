@@ -220,6 +220,8 @@ public class CubePlacement : MonoBehaviour
     {
         _inPlacementField = false;
         _interactableInPlacementField = null;
+        //fully error check this!!!
+
     }
     /// <summary>
     /// <br>Adds the <see cref="Vector3"/> <see cref="List{T}"/> <see cref="_shipPartsToAdd"/> to the <see cref="Vector3"/> <see cref="List{T}"/> <see cref="_shipParts"/></br>
@@ -230,10 +232,14 @@ public class CubePlacement : MonoBehaviour
         _shipParts.AddRange(_shipPartsToAdd);
         _shipPartsToAdd.Clear();
     }
+    private void ResetPlacableObject()
+    {
+
+    }
 
     private void FixedUpdate()
-    {
-        if (_previewObject != null && _interactableInPlacementField.tag == _buildTag)//is != null necessary?
+    {//THIS IS LIKE THE WORST WAY TO DO THIS! TRY MAKING IT TRIGGER ONCE ENTERING COLLIDER WITH TAG "BuildZone" AND REVERSE EFFECTS ONCE IT LEAVES THAT ZONE!
+        if (_previewObject != null && _interactableInPlacementField != null && _interactableInPlacementField.tag == _buildTag)//is != null necessary?
         {
             _interactableInPlacementField.transform.localScale = _localScale;
             _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = false;
@@ -257,7 +263,14 @@ public class CubePlacement : MonoBehaviour
                             GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedNames, _shipPartsHashtable[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
                             placedObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
                             ClampObject(placedObject);
-                            GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
+                            GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, _interactableInPlacementField.GetComponent<ShipPart>().blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
+
+                            Debug.Log($"Respawned object default: {respawnedObject.GetComponent<ShipPart>().defaultArmorMeshIndex}, Interactable index {_interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex}");
+                            respawnedObject.GetComponent<ShipPart>().defaultArmorMeshIndex = _interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex;
+                            respawnedObject.GetComponent<ShipPart>().selectedArmorMeshIndex = _interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex;
+                            Debug.Log($"Respawned object default: {respawnedObject.GetComponent<ShipPart>().defaultArmorMeshIndex}, Interactable index {_interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex}");
+                            respawnedObject.GetComponent<ShipPart>().RefreshMesh();
+
                             _shipPartsToAdd.Add(placedObject.transform.localPosition);
                             Destroy(_interactableInPlacementField.gameObject);
                             _interactableInPlacementField = null;

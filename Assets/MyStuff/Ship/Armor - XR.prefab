@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5677170627995362363}
   m_Layer: 0
   m_Name: Armor - XR
-  m_TagString: ShipPart
+  m_TagString: Buildable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,6 +261,10 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 1744050beefb7dc4f8f618f61cec6f2d, type: 3}
   - {fileID: 919132149155446097, guid: 778dbca7b629ed44bb23b188fba4c3fc, type: 3}
   - {fileID: 919132149155446097, guid: 4978ed1947f37b546a02c976fc2ebc40, type: 3}
+  selectedArmorMeshIndex: 0
+  defaultArmorIndex: 0
+  localPlacementCoordinates: []
+  blockRespawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1363045146865272431
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4156585945880628641}
   m_Layer: 0
   m_Name: z axis
-  m_TagString: Untagged
+  m_TagString: BuildingVisual
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 4801940581911889858}
   m_Layer: 0
   m_Name: y axis
-  m_TagString: Untagged
+  m_TagString: BuildingVisual
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 3402182176942307739}
   m_Layer: 0
   m_Name: Ship Core Type 4
-  m_TagString: ShipPart
+  m_TagString: Buildable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 1
   m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
+  m_RetainTransformParent: 0
   m_AttachPointCompatibilityMode: 0
 --- !u!1 &3330272416694709647
 GameObject:
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 7409132662272082567}
   m_Layer: 0
   m_Name: Build Zone
-  m_TagString: Untagged
+  m_TagString: BuildZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -496,8 +496,9 @@ MonoBehaviour:
   - {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
   _shipPartsPlaced:
   - {fileID: 4779986001547353377, guid: 219d741a312407c479c6d9e087bbc798, type: 3}
+  _shipPartsPlacedNames: []
   blockRespawnPoint: {x: 0, y: 0.5, z: 0.5}
-  _buildTag: ShipPart
+  _buildTag: Buildable
   _shipCore: {fileID: 1120650902935801291}
   _previewPlacementObject: {fileID: 2769994420416357062, guid: 734e7ff16e8ec36468d0dbcde87e7381, type: 3}
   _badPlacementMaterial: {fileID: 2100000, guid: 836fd9ac964a53d469b12247b92de7e6, type: 2}
@@ -514,7 +515,7 @@ GameObject:
   - component: {fileID: 7031447042945294751}
   m_Layer: 0
   m_Name: x axis
-  m_TagString: Untagged
+  m_TagString: BuildingVisual
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
