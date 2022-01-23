@@ -2291,6 +2291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armor - XR
       objectReference: {fileID: 0}
+    - target: {fileID: 341653930067573766, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5677170627995362363, guid: 8d1e6f58c74c15a45a0d871882d659b1, type: 3}
       propertyPath: blockRespawnPoint.x
       value: -0.5
@@ -5184,6 +5188,10 @@ PrefabInstance:
     - target: {fileID: 196817301475779931, guid: 61f24a8ecc06ec741bf0cd8653692a10, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546477516349333286, guid: 61f24a8ecc06ec741bf0cd8653692a10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8222247338634970887, guid: 61f24a8ecc06ec741bf0cd8653692a10, type: 3}
       propertyPath: m_RootOrder

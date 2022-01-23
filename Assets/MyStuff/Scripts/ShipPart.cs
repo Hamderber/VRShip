@@ -13,10 +13,12 @@ public class ShipPart : MonoBehaviour
     public int selectedArmorMeshIndex = 0;
     public List<Vector3> localPlacementCoordinates = new();
     public Vector3 blockRespawnPoint = Vector3.zero;
+    public Vector3 defaultLocalScale = Vector3.one;
 
 
     private void Awake()
     {
+        defaultLocalScale = transform.localScale;
         RefreshMesh();
     }
     private void OnDestroy()

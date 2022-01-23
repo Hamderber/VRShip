@@ -60,64 +60,30 @@ public class CubePlacement : MonoBehaviour
     /// <returns></returns>
     private Quaternion ClampAxisRotation(GameObject ob)
     {
-        float x = ((ob.transform.localEulerAngles.x % 360f) + 360f) % 360f;
-        float y = ((ob.transform.localEulerAngles.y % 360f) + 360f) % 360f;
-        float z = ((ob.transform.localEulerAngles.z % 360f) + 360f) % 360f;
+        return Quaternion.Euler(ClampEulerAngle(ob.transform.localEulerAngles.x), ClampEulerAngle(ob.transform.localEulerAngles.y), ClampEulerAngle(ob.transform.localEulerAngles.z));
+    }
 
-        if (x <= 45f)
+    private float ClampEulerAngle(float angle)
+    {
+        angle = ((angle % 360f) + 360f) % 360f;
+        if (angle <= 45f)
         {
-            x = 0f;
+            angle = 0f;
         }
-        else if (x <= 135f)
+        else if (angle <= 135f)
         {
-            x = 90f;
+            angle = 90f;
         }
-        else if (x <= 225f)
+        else if (angle <= 225f)
         {
-            x = 180f;
+            angle = 180f;
         }
-        else if (x <= 315f)
+        else if (angle <= 315f)
         {
-            x = 270f;
+            angle = 270f;
         }
-        else x = 360f;
-
-        if (y <= 45f)
-        {
-            y = 0f;
-        }
-        else if (y <= 135f)
-        {
-            y = 90f;
-        }
-        else if (y <= 225f)
-        {
-            y = 180f;
-        }
-        else if (y <= 315f)
-        {
-            y = 270f;
-        }
-        else y = 360f;
-
-        if (z <= 45f)
-        {
-            z = 0f;
-        }
-        else if (z <= 135f)
-        {
-            z = 90f;
-        }
-        else if (z <= 225f)
-        {
-            z = 180f;
-        }
-        else if (z <= 315f)
-        {
-            z = 270f;
-        }
-        else z = 360f;
-        return Quaternion.Euler(x, y, z);
+        else angle = 360f;
+        return angle;
     }
     /// <summary>
     /// <br>Returns a <see cref="Vector3"/> that is the <see cref="GameObject"/>'s local coordinates rounded to the nearest whole number as a <see cref="float"/>.</br>
@@ -184,7 +150,7 @@ public class CubePlacement : MonoBehaviour
     {
         _previewObject = Instantiate(_previewPlacementObject, _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
         _previewObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
-        _interactableInPlacementField.transform.localScale *= 0.5f;
+        _interactableInPlacementField.transform.localScale = _localScale / 2;
         _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = true;
         _previewObject.transform.parent = _interactableInPlacementField.transform;
         ClampObject(_previewObject);
@@ -207,9 +173,12 @@ public class CubePlacement : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        _inPlacementField = true;
-        _interactableInPlacementField = other.gameObject;
-        _interactableInPlacementField.name = CleanupName(_interactableInPlacementField.name);
+        if(other.tag == _buildTag)
+        {
+            _inPlacementField = true;
+            _interactableInPlacementField = other.gameObject;
+            _interactableInPlacementField.name = CleanupName(_interactableInPlacementField.name);
+        }
     }
     /// <summary>
     /// <br>Sets <see cref="_inPlacementField"/> to false once a <see cref="Collider"/> leaves, then sets the colliding <see cref="GameObject"/> reference</br>
@@ -218,10 +187,19 @@ public class CubePlacement : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
-        _inPlacementField = false;
-        _interactableInPlacementField = null;
-        //fully error check this!!!
-
+        if (_interactableInPlacementField == null) return;
+        if(other.gameObject.GetInstanceID() == _interactableInPlacementField.GetInstanceID())
+        {
+            if(_interactableInPlacementField != null)
+            {
+                _interactableInPlacementField.transform.localScale = _interactableInPlacementField.GetComponent<ShipPart>().defaultLocalScale;
+                _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = false;
+                _interactableInPlacementField = null;
+                Destroy(_previewObject);
+                _previewObject = null;
+            }
+            _inPlacementField = false;
+        }
     }
     /// <summary>
     /// <br>Adds the <see cref="Vector3"/> <see cref="List{T}"/> <see cref="_shipPartsToAdd"/> to the <see cref="Vector3"/> <see cref="List{T}"/> <see cref="_shipParts"/></br>
@@ -244,7 +222,7 @@ public class CubePlacement : MonoBehaviour
     {//THIS IS LIKE THE WORST WAY TO DO THIS! TRY MAKING IT TRIGGER ONCE ENTERING COLLIDER WITH TAG "BuildZone" AND REVERSE EFFECTS ONCE IT LEAVES THAT ZONE!
         if (_previewObject != null && _interactableInPlacementField != null && _interactableInPlacementField.tag == _buildTag)//is != null necessary?
         {
-            _interactableInPlacementField.transform.localScale = _localScale;
+            _interactableInPlacementField.transform.localScale = _interactableInPlacementField.GetComponent<ShipPart>().defaultLocalScale;
             _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = false;
             Destroy(_previewObject);
         }
