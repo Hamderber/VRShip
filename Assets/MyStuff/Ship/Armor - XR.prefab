@@ -199,7 +199,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 0}
   m_AttachEaseInTime: 0.15
-  m_MovementType: 0
+  m_MovementType: 2
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -246,8 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f64715e8c4854499a710a5253087cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftTriggerReference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  rightTriggerReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   armorPrefabs:
   - {fileID: 919132149155446097, guid: 7b6a3dc1906250e45ac3479ea83a03a5, type: 3}
   - {fileID: 919132149155446097, guid: d471c25264c9bbd44a4c2b874170e5fb, type: 3}
@@ -262,7 +260,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: 778dbca7b629ed44bb23b188fba4c3fc, type: 3}
   - {fileID: 919132149155446097, guid: 4978ed1947f37b546a02c976fc2ebc40, type: 3}
   selectedArmorMeshIndex: 0
-  defaultArmorIndex: 0
+  defaultArmorMeshIndex: 0
   localPlacementCoordinates: []
   blockRespawnPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &1363045146865272431

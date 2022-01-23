@@ -3186,6 +3186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship Root
       objectReference: {fileID: 0}
+    - target: {fileID: 3402182176942307739, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
+      propertyPath: m_MovementType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7409132662272082567, guid: 50eb627e3ce7dd944a5f25d0b8e6e157, type: 3}
       propertyPath: _previewPlacementObject
       value: 

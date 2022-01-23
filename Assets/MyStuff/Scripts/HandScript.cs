@@ -51,7 +51,7 @@ public class HandScript : MonoBehaviour
         {
             objectInHand = other.gameObject;
             UpdateTagOfObjectInHand(other.gameObject);
-            DebugHand();
+            //DebugHand();
         }
     }
 
@@ -62,14 +62,14 @@ public class HandScript : MonoBehaviour
         {
             objectInHand = null;
             UpdateTagOfObjectInHand(null);
-            DebugHand();
+            //DebugHand();
         }
     }
 
     private void TriggerButtonLeft(InputAction.CallbackContext context)
     {
         if (objectInHand == null) return;
-        Debug.Log($"{name}'s held object is {objectInHand.name} with ID: {objectInHand.GetInstanceID()}");
+        //Debug.Log($"{name}'s held object is {objectInHand.name} with ID: {objectInHand.GetInstanceID()}");
         var scriptReference_ShipPart = objectInHand.GetComponent<ShipPart>();
         if(scriptReference_ShipPart != null) scriptReference_ShipPart.ChangeArmorMesh(-1);
     }
@@ -77,7 +77,7 @@ public class HandScript : MonoBehaviour
     private void TriggerButtonRight(InputAction.CallbackContext context)
     {
         if (objectInHand == null) return;
-        Debug.Log($"{name}'s held object is {objectInHand.name} with ID: {objectInHand.GetInstanceID()}");
+        //Debug.Log($"{name}'s held object is {objectInHand.name} with ID: {objectInHand.GetInstanceID()}");
         var scriptReference_ShipPart = objectInHand.GetComponent<ShipPart>();
         if (scriptReference_ShipPart != null) scriptReference_ShipPart.ChangeArmorMesh(1);
     }

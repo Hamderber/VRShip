@@ -29,13 +29,13 @@ public class CubePlacement : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        for(int x = 0; x < _shipPartsVR.Length; x++)
+        for (int x = 0; x < _shipPartsVR.Length; x++)
         {
             _shipPartsHashtable.Add(_shipPartsVR[x].name, _shipPartsPlaced[x].name);
         }
         // Yes, this needs to be two separate loops. You refactored this in the past and broke it!
         _shipPartsPlacedNames = new string[_shipPartsVR.Length];
-        for (int x = 0; x< _shipPartsVR.Length; x++)
+        for (int x = 0; x < _shipPartsVR.Length; x++)
         {
             _shipPartsPlacedNames[x] = _shipPartsPlaced[x].name;
         }
@@ -60,7 +60,7 @@ public class CubePlacement : MonoBehaviour
     /// <returns></returns>
     private Quaternion ClampAxisRotation(GameObject ob)
     {
-        float x = ((ob.transform.localEulerAngles.x % 360f) +360f) % 360f;
+        float x = ((ob.transform.localEulerAngles.x % 360f) + 360f) % 360f;
         float y = ((ob.transform.localEulerAngles.y % 360f) + 360f) % 360f;
         float z = ((ob.transform.localEulerAngles.z % 360f) + 360f) % 360f;
 
@@ -158,7 +158,7 @@ public class CubePlacement : MonoBehaviour
     {//Needs optimization!
         //eventually change _shipParts to a shipparts object list and check if placement spot is taken
         //how to have this work with multi-sized objects????
-        if(_previewObject != null)
+        if (_previewObject != null)
         {
             foreach (Vector3 vect in _shipParts)
             {
@@ -232,9 +232,12 @@ public class CubePlacement : MonoBehaviour
         _shipParts.AddRange(_shipPartsToAdd);
         _shipPartsToAdd.Clear();
     }
+    /// <summary>
+    /// <br>Hello world, <see cref="string"/></br>
+    /// </summary>
     private void ResetPlacableObject()
     {
-
+        Debug.Log("todo");
     }
 
     private void FixedUpdate()
@@ -254,7 +257,7 @@ public class CubePlacement : MonoBehaviour
             }
             else if (CheckIfValidPlacement() && _inPlacementField && !_interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected)
             {
-                if(_interactableInPlacementField != null)
+                if (_interactableInPlacementField != null)
                 {
                     foreach (Vector3 vect in _shipParts)
                     {
@@ -265,11 +268,8 @@ public class CubePlacement : MonoBehaviour
                             ClampObject(placedObject);
                             GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, _interactableInPlacementField.GetComponent<ShipPart>().blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
 
-                            Debug.Log($"Respawned object default: {respawnedObject.GetComponent<ShipPart>().defaultArmorMeshIndex}, Interactable index {_interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex}");
-                            respawnedObject.GetComponent<ShipPart>().defaultArmorMeshIndex = _interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex;
-                            respawnedObject.GetComponent<ShipPart>().selectedArmorMeshIndex = _interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex;
-                            Debug.Log($"Respawned object default: {respawnedObject.GetComponent<ShipPart>().defaultArmorMeshIndex}, Interactable index {_interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex}");
-                            respawnedObject.GetComponent<ShipPart>().RefreshMesh();
+                            //Debug.Log($"Respawned object default: {respawnedObject.GetComponent<ShipPart>().selectedArmorMeshIndex}, Interactable index {_interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex}");
+                            respawnedObject.GetComponent<ShipPart>().ChangeArmorMesh(newSelectedIndex: _interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex);
 
                             _shipPartsToAdd.Add(placedObject.transform.localPosition);
                             Destroy(_interactableInPlacementField.gameObject);
