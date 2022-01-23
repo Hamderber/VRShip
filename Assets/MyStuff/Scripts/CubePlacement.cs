@@ -7,6 +7,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class CubePlacement : MonoBehaviour
 {
+    private bool _debugThisScript = true;
+    private Debugger _console;
+
     [SerializeField] private List<Vector3> _shipParts = new();
     [SerializeField] private GameObject[] _shipPartsVR = new GameObject[0];
     [SerializeField] private GameObject[] _shipPartsPlaced = new GameObject[0];
@@ -101,8 +104,8 @@ public class CubePlacement : MonoBehaviour
     /// <param name="ob"></param>
     private void DebugRotation(GameObject ob, string endStr = "")
     {
-        Debug.Log($"Local rotation of {ob.name} x:{ob.transform.localEulerAngles.x} y:{ob.transform.localEulerAngles.y} z:{ob.transform.localEulerAngles.z} {endStr}");
-        Debug.Log($"Global rotation of {ob.name} x:{ob.transform.eulerAngles.x} y:{ob.transform.eulerAngles.y} z:{ob.transform.eulerAngles.z} {endStr}");
+        _console.Log(_debugThisScript, message: $"Local rotation of {ob.name} x:{ob.transform.localEulerAngles.x} y:{ob.transform.localEulerAngles.y} z:{ob.transform.localEulerAngles.z} {endStr}");
+        _console.Log(_debugThisScript, message: $"Global rotation of {ob.name} x:{ob.transform.eulerAngles.x} y:{ob.transform.eulerAngles.y} z:{ob.transform.eulerAngles.z} {endStr}");
     }
     /// <summary>
     /// <br>Logs <see cref="GameObject"/>'s local and global position to console.</br>
@@ -111,8 +114,8 @@ public class CubePlacement : MonoBehaviour
     /// <param name="ob"></param>
     private void DebugPosition(GameObject ob, string endStr = "")
     {
-        Debug.Log($"Local position of {ob.name} x:{ob.transform.localPosition.x} y:{ob.transform.localPosition.y} z:{ob.transform.localPosition.z} {endStr}");
-        Debug.Log($"Global rotation of {ob.name} x:{ob.transform.position.x} y:{ob.transform.position.y} z:{ob.transform.position.z} {endStr}");
+        _console.Log(_debugThisScript, message: $"Local position of {ob.name} x:{ob.transform.localPosition.x} y:{ob.transform.localPosition.y} z:{ob.transform.localPosition.z} {endStr}");
+        _console.Log(_debugThisScript, message: $"Global rotation of {ob.name} x:{ob.transform.position.x} y:{ob.transform.position.y} z:{ob.transform.position.z} {endStr}");
     }
     /// <summary>
     /// <br>Returns true if <see cref="_previewObject"/> exists and none of the <see cref="Vector3"/> coordinates in <see cref="_shipParts"/> are taken already.</br>
@@ -215,7 +218,7 @@ public class CubePlacement : MonoBehaviour
     /// </summary>
     private void ResetPlacableObject()
     {
-        Debug.Log("todo");
+        _console.Log(_debugThisScript, message: "todo");
     }
 
     private void FixedUpdate()
@@ -246,7 +249,7 @@ public class CubePlacement : MonoBehaviour
                             ClampObject(placedObject);
                             GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, _interactableInPlacementField.GetComponent<ShipPart>().blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
 
-                            //Debug.Log($"Respawned object default: {respawnedObject.GetComponent<ShipPart>().selectedArmorMeshIndex}, Interactable index {_interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex}");
+                            //_console.Log(_debugThisScript, message: $"Respawned object default: {respawnedObject.GetComponent<ShipPart>().selectedArmorMeshIndex}, Interactable index {_interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex}");
                             respawnedObject.GetComponent<ShipPart>().ChangeArmorMesh(newSelectedIndex: _interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex);
 
                             _shipPartsToAdd.Add(placedObject.transform.localPosition);

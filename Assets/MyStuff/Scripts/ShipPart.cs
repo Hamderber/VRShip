@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 
 public class ShipPart : MonoBehaviour
 {
+    private bool _debugThisScript = true;
+    private Debugger _console;
 
     public GameObject[] armorPrefabs;
     public int selectedArmorMeshIndex = 0;
@@ -23,13 +25,10 @@ public class ShipPart : MonoBehaviour
     }
     private void OnDestroy()
     {
-        PlayDestroyEffect();
+        //not working because sometimes called after script cleared from memory somehow?
+        //_console.Log(_debugThisScript, message: $"Destroy effect TODO!");
     }
 
-    private void PlayDestroyEffect()
-    {
-        //Debug.Log("Destroy effect");
-    }
 
     public void RefreshMesh()
     {

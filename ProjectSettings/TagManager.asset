@@ -8,6 +8,7 @@ TagManager:
   - Buildable
   - BuildZone
   - BuildingVisual
+  - Console
   layers:
   - Default
   - TransparentFX

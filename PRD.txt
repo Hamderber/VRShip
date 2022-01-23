@@ -6,6 +6,7 @@ ship building features:
 - difficult to see some shapes when using the build preview material
 - somehow can sometimes make shapes HUGE
 - mesh index not working correctly
+- make way to refocus console with buttonpress of some type rather than constantly
 
 redesign to support multi-size blocks
 procedural asteroid generation
