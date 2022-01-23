@@ -335,15 +335,3 @@ public class CubePlacement : MonoBehaviour
         RefreshShipParts();
     }
 }
-
-/*
- * Major issues:
- * 
- * rare ability to still place multiple blocks at same time
- * buggy on edges of the placement field
- * 
- * 
- * 
- * 
- * 
- */
