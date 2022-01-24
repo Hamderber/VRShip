@@ -63,6 +63,7 @@
     <Compile Include="Assets\MyStuff\Scripts\OffsetGrab.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Debugger.cs" />
     <Compile Include="Assets\MyStuff\Scripts\ScreenControl.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\ShipCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -38,6 +38,7 @@ public class HandScript : MonoBehaviour
     {
         if (ob == null) tagOfObjectInHand = null;
         else tagOfObjectInHand = ob.tag;
+        
     }
 
     private bool CheckIfCorrectTag(string tag)

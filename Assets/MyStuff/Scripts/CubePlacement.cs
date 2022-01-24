@@ -27,6 +27,11 @@ public class CubePlacement : MonoBehaviour
     private GameObject _previewObject;
     private GameObject _interactableInPlacementField;
 
+    public GameObject leftHand;
+    public GameObject rightHand;
+    public GameObject leftHandHolding;
+    public GameObject rightHandHolding;
+
     /// <summary>
     /// <br>When script is loaded, adds all ship parts (<see cref="_shipPartsVR"/>) to hashtable (<see cref="_shipPartsHashtable"/>) using their VR placable name as the key and the on-ship name as the value. Also adds all of the on-ship placed names to the list <see cref="_shipPartsPlacedNames"/>.</br>
     /// </summary>
@@ -42,7 +47,7 @@ public class CubePlacement : MonoBehaviour
         {
             _shipPartsPlacedNames[x] = _shipPartsPlaced[x].name;
         }
-
+        
     }
     /// <summary>
     /// <br>Returns a <see cref="string"/> with extra instances of "(Clone)" removed from the end of the string.</br>
@@ -134,7 +139,8 @@ public class CubePlacement : MonoBehaviour
                 if (_previewObject.transform.localPosition == vect)
                 {
                     _previewObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.red);
-                    _previewObject.transform.localScale *= 1.01f;
+                    _previewObject.transform.localScale *= 1.05f;
+                    
                     return false;
                 }
             }
@@ -198,6 +204,9 @@ public class CubePlacement : MonoBehaviour
                 _interactableInPlacementField.transform.localScale = _interactableInPlacementField.GetComponent<ShipPart>().defaultLocalScale;
                 _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = false;
                 _interactableInPlacementField = null;
+
+
+
                 Destroy(_previewObject);
                 _previewObject = null;
             }
@@ -222,11 +231,22 @@ public class CubePlacement : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {//THIS IS LIKE THE WORST WAY TO DO THIS! TRY MAKING IT TRIGGER ONCE ENTERING COLLIDER WITH TAG "BuildZone" AND REVERSE EFFECTS ONCE IT LEAVES THAT ZONE!
+    {
+        leftHandHolding = leftHand.GetComponent<HandScript>().objectInHand;
+        rightHandHolding = rightHand.GetComponent<HandScript>().objectInHand;
+        
+
+
+
+        //THIS IS LIKE THE WORST WAY TO DO THIS! TRY MAKING IT TRIGGER ONCE ENTERING COLLIDER WITH TAG "BuildZone" AND REVERSE EFFECTS ONCE IT LEAVES THAT ZONE!
         if (_previewObject != null && _interactableInPlacementField != null && _interactableInPlacementField.tag == _buildTag)//is != null necessary?
         {
             _interactableInPlacementField.transform.localScale = _interactableInPlacementField.GetComponent<ShipPart>().defaultLocalScale;
             _interactableInPlacementField.GetComponent<BoxCollider>().isTrigger = false;
+
+
+            
+
             Destroy(_previewObject);
         }
         if (_interactableInPlacementField != null && _interactableInPlacementField.tag != null && _interactableInPlacementField.GetComponent<XRGrabInteractable>() != null && _shipPartsHashtable.ContainsKey(_interactableInPlacementField.name))
@@ -244,20 +264,33 @@ public class CubePlacement : MonoBehaviour
                     {
                         if (!_placedInThisUpdate && CheckIfValidPlacement())
                         {
-                            GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedNames, _shipPartsHashtable[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
-                            placedObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
-                            ClampObject(placedObject);
-                            GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, _interactableInPlacementField.GetComponent<ShipPart>().blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
+                            if(leftHandHolding != null || rightHandHolding != null)
+                            {
+                                if ((leftHandHolding != null && leftHandHolding.GetInstanceID() == _interactableInPlacementField.GetInstanceID()) || (rightHandHolding != null && rightHandHolding.GetInstanceID() == _interactableInPlacementField.GetInstanceID()))
+                                {
+                                    GameObject placedObject = Instantiate(_shipPartsPlaced[Array.IndexOf(_shipPartsPlacedNames, _shipPartsHashtable[_interactableInPlacementField.name])], _interactableInPlacementField.transform.position, _interactableInPlacementField.transform.rotation);
+                                    placedObject.GetComponent<MeshFilter>().sharedMesh = _interactableInPlacementField.GetComponent<MeshFilter>().sharedMesh;
+                                    ClampObject(placedObject);
+                                    GameObject respawnedObject = Instantiate(_interactableInPlacementField.gameObject, _interactableInPlacementField.GetComponent<ShipPart>().blockRespawnPoint, _interactableInPlacementField.gameObject.transform.rotation);
 
-                            //_console.Log(_debugThisScript, message: $"Respawned object default: {respawnedObject.GetComponent<ShipPart>().selectedArmorMeshIndex}, Interactable index {_interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex}");
-                            respawnedObject.GetComponent<ShipPart>().ChangeArmorMesh(newSelectedIndex: _interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex);
+                                    
+                                    respawnedObject.GetComponent<ShipPart>().ChangeArmorMesh(newSelectedIndex: _interactableInPlacementField.GetComponent<ShipPart>().selectedArmorMeshIndex);
+                                    respawnedObject.GetComponent<ShipPart>().ResetRespawnAnchor();
 
-                            _shipPartsToAdd.Add(placedObject.transform.localPosition);
-                            Destroy(_interactableInPlacementField.gameObject);
-                            _interactableInPlacementField = null;
-                            Destroy(_previewObject);
-                            _previewObject = null;
-                            _placedInThisUpdate = true;
+                                    //_console.Log(_debugThisScript, message: $"{respawnedObject.name} placed and resetting to socket anchor");
+                                    //respawnedObject.GetComponent<ShipPart>().ResetSocketAnchor();
+
+                                    _shipPartsToAdd.Add(placedObject.transform.localPosition);
+
+
+                                    Destroy(_interactableInPlacementField.gameObject);
+                                    _interactableInPlacementField = null;
+                                    Destroy(_previewObject);
+                                    _previewObject = null;
+                                    _placedInThisUpdate = true;
+                                }
+                            }
+                            
                         }
                     }
                 }
@@ -275,6 +308,12 @@ public class CubePlacement : MonoBehaviour
  * buggy on edges of the placement field
  * 
  * 
+ * place this somewhere to reset the socketanchor if its let go when the thingy is red
+ * if (!_interactableInPlacementField.GetComponent<XRGrabInteractable>().isSelected)
+            {
+                _console.Log(_debugThisScript, message: $"{_interactableInPlacementField.name} placement determined invalid and is not being held");
+                _interactableInPlacementField.GetComponent<ShipPart>().ResetSocketAnchor();
+            }
  * 
  * 
  * 

@@ -9,10 +9,10 @@ public class Debugger : MonoBehaviour
     public List<string> consoleLines = new();
     private int _currentConsolePage = 1;
 
-    private void Start()
+    private void Awake()
     {
         _console = GameObject.FindGameObjectWithTag("Console").GetComponentInChildren<TextMeshPro>();
-        Log(message: "hello world");
+        Log(message: "Initializing console... Done!");
     }
     private void UpdateConsole()
     {
