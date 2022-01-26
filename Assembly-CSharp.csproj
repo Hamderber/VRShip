@@ -66,6 +66,7 @@
     <Compile Include="Assets\MyStuff\Scripts\OffsetGrab.cs" />
     <Compile Include="Assets\MyStuff\Scripts\TwoHandGrab.cs" />
     <Compile Include="Assets\MyStuff\Scripts\MoveToTargetPosition.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\GrabReturn.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
