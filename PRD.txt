@@ -14,6 +14,8 @@ ship building features:
 
 
 - flight assist disable button that turns off lever spring return
+- change how the lever's knob grab interacts with things so that far away levers work better
+- make switches
 
 
 

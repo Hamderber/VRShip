@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 
 public class GrabReturn : MonoBehaviour
 {
-    public Quaternion defaultQuaternion;
     public Transform defaultTransform;
     public GameObject grabbableObject;
     public float speed = 1f;
