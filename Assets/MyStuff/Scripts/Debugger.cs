@@ -12,7 +12,7 @@ public class Debugger : MonoBehaviour
     private void Awake()
     {
         _console = GameObject.FindGameObjectWithTag("Console").GetComponentInChildren<TextMeshPro>();
-        Log(message: "Initializing console... Done!");
+        Log(message: "Initializing console... Done", endOfMessage: "!");
     }
     private void UpdateConsole()
     {
@@ -40,11 +40,11 @@ public class Debugger : MonoBehaviour
         } 
     }
 
-    public void Log(bool debugEnabled = true, string startOfMessage = "-", string message = "", string middleOfMessage = "", string endOfMessage = "")
+    public void Log(bool debugEnabled = true, string startOfMessage = "-", string message = "", string middleOfMessage = "", string endOfMessage = ".")
     {
         if (debugEnabled)
         {
-            string log = $"{startOfMessage}{message}{middleOfMessage}{endOfMessage}.";
+            string log = $"{startOfMessage}{message}{middleOfMessage}{endOfMessage}";
             Debug.Log(log);
             consoleLines.Add(log);
             UpdateConsole();

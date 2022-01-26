@@ -56,14 +56,16 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MyStuff\Scripts\ScreenControl.cs" />
     <Compile Include="Assets\MyStuff\Scripts\ShipPart.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\Debugger.cs" />
     <Compile Include="Assets\MyStuff\Scripts\HandScript.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\ShipCore.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Ship.cs" />
     <Compile Include="Assets\MyStuff\Scripts\CubePlacement.cs" />
     <Compile Include="Assets\MyStuff\Scripts\OffsetGrab.cs" />
-    <Compile Include="Assets\MyStuff\Scripts\Debugger.cs" />
-    <Compile Include="Assets\MyStuff\Scripts\ScreenControl.cs" />
-    <Compile Include="Assets\MyStuff\Scripts\ShipCore.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\TwoHandGrab.cs" />
+    <Compile Include="Assets\MyStuff\Scripts\MoveToTargetPosition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -5,6 +5,18 @@ ship building features:
 - difficult to see some shapes when using the build preview material
 - fix armor index 7
 
+- reorganize mode for cockpit that disables things like screen rotation or grabbing of things like the console when not in that mode (to fix buggy rotation of the whole cockpit) also disable the thing that lets you move objects youre holding forward and back in the normal flight mode
+
+- levers in cockpit FREAK OUT if pulled too far away from their base
+- sometimes the wrong text is selected when debugger is initialized
+- if i cant stop levers freaking out have them break off and become useless if they are pulled off of their base
+
+
+
+- flight assist disable button that turns off lever spring return
+
+
+
 redesign to support multi-size blocks
 procedural asteroid generation
 resource gathering
@@ -19,6 +31,7 @@ if a block becomes floating, it is destroyed (maybe breaks off somehow? might be
 build mode and play mode
 trading stations
 radiant quests?
+entering planet atmosphere burns up ship until planet is implemented
 change building from tracking ship core's vector3's to gameobject (still use vector3 for placement checking)
 any weapon on grid verifies there are no blocks in front of it before firing
 projectiles fired inherit the reference to what shot it and doesnt do damage to that thing

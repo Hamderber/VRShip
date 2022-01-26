@@ -10,6 +10,7 @@ public class ShipCore : MonoBehaviour
 
     [SerializeField] private GameObject _placementPreview;
 
+
     public void TogglePlacementPreview()
     {
         if (gameObject.GetComponent<XRGrabInteractable>().isSelected)
