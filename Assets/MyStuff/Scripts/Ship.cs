@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    
+    public GameObject shipToControl;
+    private float _rotationModifier = 1f;
+    public float mass;
+    public GameObject consoleObject;
+
     [SerializeField]
     private bool _isAIControlled = false;
 
@@ -23,7 +27,7 @@ public class Ship : MonoBehaviour
     public void GenerateRandomInventory()
     {
         // Loot generation for random ships
-        if(_isAIControlled)
+        if (_isAIControlled)
         {
 
         }
@@ -34,9 +38,5 @@ public class Ship : MonoBehaviour
 
         }
     }
-
-
-
-
 
 }

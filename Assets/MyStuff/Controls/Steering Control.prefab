@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2323724457908742957}
   m_Layer: 0
   m_Name: Steering Control Center (1)
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -526,7 +526,7 @@ GameObject:
   - component: {fileID: 2647513356689980655}
   m_Layer: 6
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 6606043648757640763}
   m_Layer: 6
   m_Name: Base Left
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 283302364450327500}
   m_Layer: 0
   m_Name: Steering Control
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -957,7 +957,7 @@ GameObject:
   - component: {fileID: 2440668821551655930}
   m_Layer: 0
   m_Name: Ship Info
-  m_TagString: Console
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1135,7 +1135,7 @@ GameObject:
   - component: {fileID: 7419353987622379014}
   m_Layer: 0
   m_Name: LeverText
-  m_TagString: Console
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1305,7 +1305,7 @@ GameObject:
   - component: {fileID: 5463758297214022045}
   m_Layer: 0
   m_Name: Joystick Type
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1537,7 +1537,7 @@ GameObject:
   - component: {fileID: 3371848175944462214}
   m_Layer: 0
   m_Name: Center
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1686,7 +1686,7 @@ GameObject:
   - component: {fileID: 6837879897313852265}
   m_Layer: 6
   m_Name: Lever
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2098,7 +2098,7 @@ GameObject:
   - component: {fileID: 5177355674704301611}
   m_Layer: 0
   m_Name: Steering Control Center
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2293,7 +2293,7 @@ GameObject:
   - component: {fileID: 5692738985933463688}
   m_Layer: 6
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2393,7 +2393,7 @@ GameObject:
   - component: {fileID: 2323818775316407736}
   m_Layer: 6
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2711,7 +2711,7 @@ GameObject:
   - component: {fileID: 6452054143002137314}
   m_Layer: 6
   m_Name: Base Right
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2809,7 +2809,7 @@ GameObject:
   - component: {fileID: 4908505472743626275}
   m_Layer: 0
   m_Name: Wheel Type
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2958,11 +2958,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8136947
+      value: 0.8141155
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.58129245
+      value: -0.58070296
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2974,7 +2974,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -71.083
+      value: -71
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3020,11 +3020,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8136947
+      value: 0.8141155
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.58129245
+      value: -0.58070296
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3036,7 +3036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -71.083
+      value: -71
       objectReference: {fileID: 0}
     - target: {fileID: 4785165192470218478, guid: 1752d39f4234e594588d3d88a5f27030, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

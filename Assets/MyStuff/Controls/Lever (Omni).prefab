@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4785165192470218478}
+  - component: {fileID: 7445276938303967500}
   m_Layer: 0
   m_Name: Lever (Omni)
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23,8 +24,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360093187698674518}
-  m_LocalRotation: {x: -0.58129245, y: 0, z: 0, w: 0.8136947}
-  m_LocalPosition: {x: -0.15, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34,7 +35,29 @@ Transform:
   - {fileID: 955624094491641076}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -71.083, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7445276938303967500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360093187698674518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91125fbf58609ef48b5e0fa4579b57b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystickValue: {fileID: 7396766217426587173}
+  leverValue: 0
+  switchInUpPosition: 0
+  buttonPressed: 0
+  controllerType: joystick
+  controllerTypes:
+  - joystick
+  - lever
+  - switch
+  - button
 --- !u!1 &1017718925897471625
 GameObject:
   m_ObjectHideFlags: 0
@@ -49,7 +72,7 @@ GameObject:
   - component: {fileID: 4213721772069302614}
   m_Layer: 6
   m_Name: Base
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,8 +85,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017718925897471625}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.025, z: 0.1}
+  m_LocalPosition: {x: 0, y: -0.0125, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.05, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4785165192470218478}
@@ -148,7 +171,7 @@ GameObject:
   - component: {fileID: 2670762208477748704}
   m_Layer: 0
   m_Name: LeverText
-  m_TagString: Console
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -319,9 +342,10 @@ GameObject:
   - component: {fileID: 4184762776269690557}
   - component: {fileID: 6278228650220930524}
   - component: {fileID: 2023266436444170631}
+  - component: {fileID: 6348827949951506608}
   m_Layer: 6
   m_Name: Knob Grabbable
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,6 +418,24 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6348827949951506608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5855205283993168785}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b254182c8ebdeee4ebeeb18c35e1d15d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localXLimitPos: 0
+  localYLimitPos: 0
+  localZLimitPos: 0
+  localXLimitNeg: 0
+  localYLimitNeg: 0
+  localZLimitNeg: 0
 --- !u!1 &6330823065612140103
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +450,7 @@ GameObject:
   - component: {fileID: 3263132712976358393}
   m_Layer: 6
   m_Name: Knob
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -506,7 +548,7 @@ GameObject:
   - component: {fileID: 8079287385976689525}
   m_Layer: 6
   m_Name: Lever Default Transform
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -543,7 +585,7 @@ GameObject:
   - component: {fileID: 6030059521745161264}
   m_Layer: 6
   m_Name: Lever
-  m_TagString: Untagged
+  m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -854,7 +896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f2b82bfa457384b9472e1d229eb98c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultQuaternion: {x: 0, y: 0, z: 0, w: 0}
   defaultTransform: {fileID: 8079287385976689525}
   grabbableObject: {fileID: 8430067906319479980}
   speed: 0.25
