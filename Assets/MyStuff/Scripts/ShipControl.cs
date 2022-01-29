@@ -113,8 +113,8 @@ public class ShipControl : MonoBehaviour
         //shipRoot.transform.position = shipRoot.transform.position + (shipRoot.transform.up * speedY * velocityMultiplier);
         //shipRoot.transform.position = shipRoot.transform.position + (shipRoot.transform.right * speedZ * velocityMultiplier);
         shipRoot.transform.Translate(new Vector3(
-            (speedZ * velocityMultiplier),
-            (speedY * velocityMultiplier),
+            0f,//(speedZ * velocityMultiplier),
+            0f,//(speedY * velocityMultiplier),
             (speedX * velocityMultiplier)),
             Space.Self);
 

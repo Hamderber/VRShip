@@ -86,8 +86,9 @@ public class ShipControllerScript : MonoBehaviour
         }
         if(!checkIfHeld)
         {
-            Debug.Log($"grab rotation {joystickValue.transform.localRotation} parent rotation {cockpit.transform.localRotation}");
+            Debug.Log($"grab rotation x {joystickValue.transform.localRotation.x * 360} y {joystickValue.transform.localRotation.y * 360} z {joystickValue.transform.localRotation.z * 360} ");
             //Debug.Log($"Local {joystickValue.transform.localRotation}");
+            //joystickValue.transform.localRotation *= Quaternion.Inverse(cockpit.transform.rotation);
             if (axis == 'x') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.x), -150, 150);
             if (axis == 'y') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.y), -150, 150);
             if (axis == 'z') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.z), -150, 150);
