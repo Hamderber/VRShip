@@ -17,6 +17,8 @@ public class ShipControllerScript : MonoBehaviour
     public GameObject grabbableGameObject;
     private bool _debugThisScript = true;
     private Debugger _console;
+
+    public GameObject cockpit;
     private void Start()
     {
         _console = GameObject.FindGameObjectWithTag("Console").GetComponent<Debugger>();
@@ -71,16 +73,21 @@ public class ShipControllerScript : MonoBehaviour
         {
             return 0f;//todo
         }
+
+        
+
         bool isHeld = (grabbableGameObject.GetComponent<XRGrabInteractable>() != null) ? grabbableGameObject.GetComponent<XRGrabInteractable>().isSelected : false;
         if (checkIfHeld && isHeld)
         {
             
-            if (axis == 'x') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.x), -150, 150);
-            if (axis == 'y') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.y), -150, 150);
-            if (axis == 'z') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.z), -150, 150);
+            if (axis == 'x') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.x - cockpit.transform.localRotation.x), -150, 150);
+            if (axis == 'y') return - Math.Clamp(ClampRotation(joystickValue.transform.localRotation.y - cockpit.transform.localRotation.y), -150, 150);
+            if (axis == 'z') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.z - cockpit.transform.localRotation.z), -150, 150);
         }
         if(!checkIfHeld)
         {
+            Debug.Log($"grab rotation {joystickValue.transform.localRotation} parent rotation {cockpit.transform.localRotation}");
+            //Debug.Log($"Local {joystickValue.transform.localRotation}");
             if (axis == 'x') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.x), -150, 150);
             if (axis == 'y') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.y), -150, 150);
             if (axis == 'z') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.z), -150, 150);

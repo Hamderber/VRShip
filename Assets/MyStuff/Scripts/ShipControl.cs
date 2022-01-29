@@ -19,7 +19,7 @@ public class ShipControl : MonoBehaviour
 
     public float maxRotation;//max degrees per second ship can rotate
     public float maxVelocity;
-    public float velocityMultiplier = 1.0f;
+    public float velocityMultiplier;
 
     public float axialSensitivity = 15f;
     public float rotationalSensitivity;
@@ -35,7 +35,7 @@ public class ShipControl : MonoBehaviour
 
     private Transform _previousPositon = null;
     public Vector3 shipVelocity;
-
+    public ShipStatusPanel shipStatusPanel;
 
     private void Start()
     {
@@ -65,12 +65,13 @@ public class ShipControl : MonoBehaviour
         speedX = shipControllerScriptLeft.GetJoystickValue('x');
         speedY = shipControllerScriptLeft.GetJoystickValue('y');
         speedZ = shipControllerScriptLeft.GetJoystickValue('z');
+        //Debug.Log($"{speedX}, {speedY}, {speedZ}");
     }
 
     private float CalculateVelocity(float speed)
     {
 
-        if (speed >= axialSensitivity)
+        /*if (speed >= axialSensitivity)
         {
             speed = (speed >= axialSensitivity) ? speed : 0f;
             return velocityMultiplier * Mathf.Clamp(speed, -maxVelocity, maxVelocity);
@@ -79,7 +80,9 @@ public class ShipControl : MonoBehaviour
         {
             speed = (speed <= -axialSensitivity) ? speed : 0f;
             return velocityMultiplier * Mathf.Clamp(speed, -maxVelocity, maxVelocity);
-        }
+        }*/
+        if (speed >= axialSensitivity) return speed = (speed > axialSensitivity) ? speed : 0f;
+        if (speed <= -axialSensitivity) return speed = (speed < -axialSensitivity) ? speed : 0f;
         return 0f;
      }
     private float CalculateAngularVelocity(float rotation)
@@ -92,10 +95,10 @@ public class ShipControl : MonoBehaviour
 
     private void DetermineShipVelocity()
     {
-        pitch = rotationalMultiplier * CalculateAngularVelocity(pitch) + shipRoot.transform.rotation.x;
-        roll = rotationalMultiplier * CalculateAngularVelocity(roll) + shipRoot.transform.rotation.z;
-        yaw = rotationalMultiplier * CalculateAngularVelocity(yaw) + shipRoot.transform.rotation.y;
-        speedZ = CalculateVelocity(speedZ);
+        pitch = rotationalMultiplier * CalculateAngularVelocity(pitch);// + shipRoot.transform.rotation.x;
+        roll = rotationalMultiplier * CalculateAngularVelocity(roll);// + shipRoot.transform.rotation.z;
+        yaw = - rotationalMultiplier * CalculateAngularVelocity(yaw);// + shipRoot.transform.rotation.y;
+        speedZ = - CalculateVelocity(speedZ);
         speedY = CalculateVelocity(speedY * upDownMultiplier);
         speedX = CalculateVelocity(speedX);
     }
@@ -103,7 +106,19 @@ public class ShipControl : MonoBehaviour
     public void ApplyMovementToShip()
     {
         DetermineShipVelocity();
-        shipRootRB.velocity = new Vector3(-speedZ, speedY, speedX);//z inverted to make controller make sense
+        //shipRootRB.velocity = 
+        //shipRootRB.velocity = new Vector3(-speedZ, speedY, speedX);//z inverted to make controller make sense
+        
+        //shipRoot.transform.position = shipRoot.transform.position + (shipRoot.transform.forward * speedX * velocityMultiplier);
+        //shipRoot.transform.position = shipRoot.transform.position + (shipRoot.transform.up * speedY * velocityMultiplier);
+        //shipRoot.transform.position = shipRoot.transform.position + (shipRoot.transform.right * speedZ * velocityMultiplier);
+        shipRoot.transform.Translate(new Vector3(
+            (speedZ * velocityMultiplier),
+            (speedY * velocityMultiplier),
+            (speedX * velocityMultiplier)),
+            Space.Self);
+
+
         //shipRootRB.angularVelocity = new Vector3(pitch, yaw, roll);
         //shipRoot.transform.Rotate(new Vector3(-roll, -pitch, -yaw), Space.World);
         //shipRoot.transform.rotation = Quaternion.Euler(
@@ -126,7 +141,7 @@ public class ShipControl : MonoBehaviour
         
         UpdateControlShipControlInput();
         ApplyMovementToShip();
-
+        shipStatusPanel.UpdateDisplay();
         
     }
 }
