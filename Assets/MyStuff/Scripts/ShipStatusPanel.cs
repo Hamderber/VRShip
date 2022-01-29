@@ -14,16 +14,19 @@ public class ShipStatusPanel : MonoBehaviour
     public double yaw = 0;
     public ShipControllerScript shipControllerScriptRight;
     public ShipControllerScript shipControllerScriptLeft;
+    public ShipControl physicsShipController;
+    public GameObject physicsShip;
 
     void UpdateDisplay()
     {
         panelText.text =
-            $"Pitch: (x){pitch}º\n" +
-            $"Yaw: (y){yaw}º\n" +
-            $"Roll: (z){roll}º\n" +
-            $"Speed: (x) {speedX} km/hr\n" +
-            $"Speed: (y) {speedY} km/hr\n" +
-            $"Speed: (z) {speedZ} km/hr";
+            $"Pitch {Mathf.FloorToInt(physicsShipController.pitch)}º\n" +
+            $"Yaw {Mathf.FloorToInt(physicsShipController.yaw)}º\n" +
+            $"Roll {Mathf.FloorToInt(physicsShipController.roll)}º\n" +
+            $"Forward {Mathf.FloorToInt(physicsShipController.speedX)}km/hr\n" +
+            $"Left/Right {-Mathf.FloorToInt(physicsShipController.speedZ)}km/hr\n" +
+            $"Up/Down {Mathf.FloorToInt(physicsShipController.speedY)}km/hr\n" +
+            $"Coordinates:\n{physicsShip.transform.position}";
     }
 
     private void UpdateControlShipControlInput()
@@ -38,7 +41,7 @@ public class ShipStatusPanel : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UpdateControlShipControlInput();
+        //UpdateControlShipControlInput();
         UpdateDisplay();
     }
 }

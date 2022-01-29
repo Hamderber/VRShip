@@ -57,7 +57,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -70,7 +70,7 @@ SpringJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3240531546378352524}
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 2086674050374017423}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 5386122143157751533}
   - component: {fileID: 5386122143157751530}
   - component: {fileID: 5386122143157751531}
+  - component: {fileID: 2086674050374017423}
   m_Layer: 6
   m_Name: Knob
   m_TagString: Ship Control
@@ -377,6 +378,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &2086674050374017423
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5386122143157751534}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &5386122143617614341
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +408,6 @@ GameObject:
   - component: {fileID: 5386122143617614338}
   - component: {fileID: 5386122143617614339}
   - component: {fileID: 5386122143617614350}
-  - component: {fileID: 2393600366905269825}
   m_Layer: 6
   m_Name: Lever
   m_TagString: Ship Control
@@ -475,9 +491,9 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -488,7 +504,7 @@ HingeJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5386122143617614341}
-  m_ConnectedBody: {fileID: 8519950665816118820}
+  m_ConnectedBody: {fileID: 9040021117593766598}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: -0.45, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
@@ -633,21 +649,6 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
---- !u!114 &2393600366905269825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5386122143617614341}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3f2b82bfa457384b9472e1d229eb98c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultTransform: {fileID: 0}
-  grabbableObject: {fileID: 0}
-  speed: 0.25
 --- !u!1 &7618151201255144952
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +660,7 @@ GameObject:
   - component: {fileID: 4360514063560407316}
   - component: {fileID: 911789447461165480}
   - component: {fileID: 8465773772502627604}
-  - component: {fileID: 8519950665816118820}
+  - component: {fileID: 9040021117593766598}
   m_Layer: 6
   m_Name: Base
   m_TagString: Ship Control
@@ -732,7 +733,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &8519950665816118820
+--- !u!54 &9040021117593766598
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -742,9 +743,9 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2

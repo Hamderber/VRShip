@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4785165192470218478}
   - component: {fileID: 7445276938303967500}
   m_Layer: 0
-  m_Name: Lever (Omni)
+  m_Name: Lever (Omni) 1
   m_TagString: Ship Control
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,7 +400,7 @@ SpringJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5855205283993168785}
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 3263132712976358393}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0

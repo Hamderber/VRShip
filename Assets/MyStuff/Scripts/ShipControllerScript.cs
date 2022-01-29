@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShipControllerScript : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class ShipControllerScript : MonoBehaviour
     public string controllerType;
     public List<string> controllerTypes = new() { "joystick", "lever", "switch", "button" };//enum
     private bool _validController = false;
-
+    public GameObject grabbableGameObject;
     private bool _debugThisScript = true;
     private Debugger _console;
     private void Start()
@@ -40,7 +41,7 @@ public class ShipControllerScript : MonoBehaviour
         _validController = true;
     }
 
-    public double GetControllerValue()
+    public float GetControllerValue()
     {
         if (!_validController) return 0;//return 0f if invalid controller
         if(controllerType == "joystick")
@@ -50,9 +51,9 @@ public class ShipControllerScript : MonoBehaviour
         return 0;
     }
 
-    private double ClampRotation(float rotation)
+    private float ClampRotation(float rotation)
     {
-        return Math.Round(rotation * 360, 2);
+        return (float)Math.Round(rotation * 360, 2);
 
     }
 
@@ -63,16 +64,27 @@ public class ShipControllerScript : MonoBehaviour
     /// </summary>
     /// <param name="axis"></param>
     /// <returns></returns>
-    public double GetJoystickValue(char axis)
+    public float GetJoystickValue(char axis, bool checkIfHeld = false)
     {
         if (!_validController) return 0f;//return 0f if invalid controller
         if (controllerType != "joystick")
         {
             return 0f;//todo
         }
-        if(axis == 'x') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.x), -150, 150);
-        if(axis == 'y') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.y), -150, 150);
-        if (axis == 'z') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.z), -150, 150);
+        bool isHeld = (grabbableGameObject.GetComponent<XRGrabInteractable>() != null) ? grabbableGameObject.GetComponent<XRGrabInteractable>().isSelected : false;
+        if (checkIfHeld && isHeld)
+        {
+            
+            if (axis == 'x') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.x), -150, 150);
+            if (axis == 'y') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.y), -150, 150);
+            if (axis == 'z') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.z), -150, 150);
+        }
+        if(!checkIfHeld)
+        {
+            if (axis == 'x') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.x), -150, 150);
+            if (axis == 'y') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.y), -150, 150);
+            if (axis == 'z') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.z), -150, 150);
+        }
         return 0f;
     }
 
