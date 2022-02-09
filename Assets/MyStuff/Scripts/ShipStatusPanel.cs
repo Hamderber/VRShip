@@ -8,7 +8,10 @@ public class ShipStatusPanel : MonoBehaviour
     [SerializeField] private TextMeshPro panelText;
     public ShipControl physicsShipController;
     public GameObject physicsShip;
-
+    private void Awake()
+    {
+        panelText.text = $"Loading...";
+    }
     public void UpdateDisplay()
     {
         panelText.text =

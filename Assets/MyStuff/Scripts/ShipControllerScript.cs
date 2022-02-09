@@ -80,7 +80,7 @@ public class ShipControllerScript : MonoBehaviour
         if (checkIfHeld && isHeld)
         {
 
-            Debug.Log($"grab rotation x {joystickValue.transform.localRotation.x * 360} y {joystickValue.transform.localRotation.y * 360} z {joystickValue.transform.localRotation.z * 360} ");
+            //Debug.Log($"grab rotation x {joystickValue.transform.localRotation.x * 360} y {joystickValue.transform.localRotation.y * 360} z {joystickValue.transform.localRotation.z * 360} ");
             if (axis == 'x') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.x - cockpit.transform.localRotation.x), -150, 150);
             if (axis == 'y') return - Math.Clamp(ClampRotation(joystickValue.transform.localRotation.y - cockpit.transform.localRotation.y), -150, 150);
             if (axis == 'z') return Math.Clamp(ClampRotation(joystickValue.transform.localRotation.z - cockpit.transform.localRotation.z), -150, 150);
