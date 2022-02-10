@@ -74,6 +74,8 @@
     <Compile Include="Assets\MyStuff\Scripts\RelativeVelocity.cs" />
     <Compile Include="Assets\MyStuff\Scripts\OffsetGrab.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Ship.cs" />
+    <Compile Include="Assets\MyStuff\Menu\SettingsMenu.cs" />
+    <Compile Include="Assets\MyStuff\Menu\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
