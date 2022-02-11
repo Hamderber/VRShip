@@ -60,11 +60,13 @@
     <Compile Include="Assets\MyStuff\Scripts\ShipPart.cs" />
     <Compile Include="Assets\MyStuff\Scripts\GrabReturn.cs" />
     <Compile Include="Assets\MyStuff\Scripts\ShipControllerScript.cs" />
+    <Compile Include="Assets\MyStuff\Menu\SettingsMenu.cs" />
     <Compile Include="Assets\MyStuff\Scripts\AnchorMovement.cs" />
     <Compile Include="Assets\MyStuff\Scripts\ShipStatusPanel.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Debugger.cs" />
     <Compile Include="Assets\MyStuff\Scripts\MoveToTargetPosition.cs" />
     <Compile Include="Assets\MyStuff\Scripts\HandScript.cs" />
+    <Compile Include="Assets\MyStuff\Menu\MainMenu.cs" />
     <Compile Include="Assets\MyStuff\Scripts\ShipCore.cs" />
     <Compile Include="Assets\MyStuff\Scripts\ShipControl.cs" />
     <Compile Include="Assets\MyStuff\Scripts\TwoHandGrab.cs" />
@@ -74,8 +76,9 @@
     <Compile Include="Assets\MyStuff\Scripts\RelativeVelocity.cs" />
     <Compile Include="Assets\MyStuff\Scripts\OffsetGrab.cs" />
     <Compile Include="Assets\MyStuff\Scripts\Ship.cs" />
-    <Compile Include="Assets\MyStuff\Menu\SettingsMenu.cs" />
-    <Compile Include="Assets\MyStuff\Menu\MainMenu.cs" />
+    <Compile Include="Assets\MyStuff\Player\PlayerController.cs" />
+    <Compile Include="Assets\MyStuff\Menu\MenuHandler.cs" />
+    <Compile Include="Assets\MyStuff\Player\XRI Default Input Actions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
