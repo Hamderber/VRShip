@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-3906818962961444612
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: b12e83d25892c4d4ab8641b55799c010
+  m_EffectName: Attenuation
+  m_MixLevel: 65e6f70466018b14097fe44f3bbc5993
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-3042094107309829900
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -47,6 +61,20 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-800724345657915783
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: c275600433818be4f93587d72497acf9
+  m_EffectName: Attenuation
+  m_MixLevel: bf59103945c37b8458fc887584dcea4d
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -63,6 +91,10 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 417de3ba347fdab4ca159c731a95f347
+    name: EnemyChatVolume
+  - guid: 8522c3ece3aa8964bb236fb0f474a3bc
+    name: FriendlyChatVolume
   - guid: 6b3a3f8e1828f3443823f5dbd3a2b121
     name: GameplayVolume
   - guid: 33b779e317d597f4cb2d22daeeeb02b4
@@ -71,12 +103,17 @@ AudioMixerController:
     name: MultiplayerVolume
   - guid: a15214131086b0444abfdfa49cf4d85a
     name: MusicVolume
+  - guid: f69db3b7f013f2746ab035574d46119f
+    name: NeutralChatVolume
   m_AudioMixerGroupViews:
   - guids:
     - f4d17369afb4ff242ae6ab92902a1c69
     - 0f0ac7c324f303243bca8631cda0a3bc
     - 9ec081854cffd39439bfa5322e6953ea
     - e5643032e4356b142b6fdf988a23ad7c
+    - 9f4780d8fcc7a0e48858c303493d6d38
+    - dd3a8bb071c592e4da2ac0b720f14f8d
+    - 4cf927dd0a810c24fbc37d6dee9de263
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -127,6 +164,58 @@ AudioMixerSnapshotController:
   m_SnapshotID: 70f7cdab896104d4b9baba0cc360b9ec
   m_FloatValues: {}
   m_TransitionOverrides: {}
+--- !u!244 &2108704587008567259
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0dd6b55b0ebb09045afefa3ce731d553
+  m_EffectName: Attenuation
+  m_MixLevel: dbd0fb1c0ac434d4bb75e022ad96615c
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &2913551167756651265
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NeutralChat
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: dd3a8bb071c592e4da2ac0b720f14f8d
+  m_Children: []
+  m_Volume: f69db3b7f013f2746ab035574d46119f
+  m_Pitch: 0a8b6f91db1872d4c936ad4d1d9c4cb4
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -800724345657915783}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &3861077980491874107
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FriendlyChat
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 9f4780d8fcc7a0e48858c303493d6d38
+  m_Children: []
+  m_Volume: 8522c3ece3aa8964bb236fb0f474a3bc
+  m_Pitch: 713e10004cc2c0940b1ec8d12018f24b
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 2108704587008567259}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &5018905001007406404
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -160,6 +249,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &6651746914048376251
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: EnemyChat
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 4cf927dd0a810c24fbc37d6dee9de263
+  m_Children: []
+  m_Volume: 417de3ba347fdab4ca159c731a95f347
+  m_Pitch: b34b86f9f9e55d049a0cf4973c72a3aa
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -3906818962961444612}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &7348834038828139937
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -169,7 +277,10 @@ AudioMixerGroupController:
   m_Name: Multiplayer
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: e5643032e4356b142b6fdf988a23ad7c
-  m_Children: []
+  m_Children:
+  - {fileID: 6651746914048376251}
+  - {fileID: 2913551167756651265}
+  - {fileID: 3861077980491874107}
   m_Volume: 00c3d4ffda035e14aa7e1dda5bbb001c
   m_Pitch: 98ba067b001614a4fab4c6151419f52a
   m_Send: 00000000000000000000000000000000
