@@ -19,17 +19,19 @@ public class SettingsMenu : MonoBehaviour
 
     private float ConvertFloatToDecible(float input)
     {
+        input = (input == 0f) ? -80f : input;
         return Mathf.Log10(input) * 20;
     }
     private int ConvertDecibleToPercent(float decible)
     {
-        return Mathf.RoundToInt((decible + 80f) * 1.25f);
+        return Mathf.RoundToInt(100f * Mathf.Pow(10f,decible/10f));
     }
     public void SetMasterVolume(float volume)
     {
         volume = ConvertFloatToDecible(volume);
+        int percent = ConvertDecibleToPercent(volume);
         audioMixer.SetFloat("MasterVolume", volume);
-        masterVolumeText.SetText($"Master Volume\n{ConvertDecibleToPercent(volume)} %");
+        masterVolumeText.SetText($"Master Volume\n{percent} %");
     }
     public void SetGameplayVolume(float volume)
     {
